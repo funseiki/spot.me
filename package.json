@@ -1,0 +1,24 @@
+{
+  "name": "MyTri",
+  "version": "0.0.1",
+  "private": true,
+  "scripts" :
+  {
+    "start": "node app"
+  },
+  "dependencies":
+  {
+    "bcrypt": "0.x.x",
+    "express" : "3.x.x",
+    "jade" : "0.x.x",
+    "stylus": "0.x.x",
+    "passport": "*",
+    "passport-local": "*",
+    "nodemailer":"*",
+    "sanitizer": "*",
+    "validator": "*",
+    "async": "*",
+    "optimist": "*",
+    "any-db" : "*"
+  }
+}
