@@ -4,6 +4,7 @@ exports.secret = {
 };
 
 exports.db = {
+    adapter: '<mysql, postgres, sqlite>',
     host: '<host here>',
     port: <port here>,
     user: '<database user>',
