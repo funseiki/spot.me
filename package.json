@@ -19,6 +19,6 @@
     "validator": "*",
     "async": "*",
     "optimist": "*",
-    "any-db" : "*"
+    "any-db-postgres" : "*"
   }
 }
