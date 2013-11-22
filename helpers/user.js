@@ -187,8 +187,12 @@ var user = {
     },
     SendRegistrationEmail: function(user, callback) {
         var opts = config.mandrillParams;
+
+        // A simple string with a url link
         var emailStr = "Click the below link to confirm your registration:<br/>"+
             config.url.full+"/user/"+user.id+"/confirmemail/"+user.token;
+
+        // Formatting the message for mandrill
         var message = {
             from_email: opts.from_email,
             from_name: opts.from_name,
@@ -199,10 +203,13 @@ var user = {
                 type: "to"
             }]
         };
+
+        // As per the API docs here: https://mandrillapp.com/api/docs/users.nodejs.html
         mailer.messages.send({message: message, async: true, ip_pool: "Main Pool" },
             function(result) {
                 console.log(result);
             },
+            // This extra callback is weird/unconventional. No me gusta
             function(e) {
                 console.log("Error occurred sending email:", e.name, '-', e.message);
             });
