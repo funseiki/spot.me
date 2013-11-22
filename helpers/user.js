@@ -5,7 +5,10 @@ var db = require('./database'),
     bcrypt = require('bcrypt'),
     sanitizer = require('sanitizer'),
     QueryStrings = require('./queryStrings'),
-    Message = require('./clientMessage');
+    Message = require('./clientMessage'),
+    config = require('../config'),
+    mandrill = require('mandrill-api/mandrill'),
+    mailer = new mandrill.Mandrill(config.mandrillParams.key);
 
 var user = {
     LoginWithEmail: function(email, password, callback) {
@@ -181,6 +184,30 @@ var user = {
         ], function(err, results) {
             db.EndConnection(err, results, locals.connection, callback);
         });
+    },
+    SendRegistrationEmail: function(user, callback) {
+        var opts = config.mandrillParams;
+        var emailStr = "Click the below link to confirm your registration:<br/>"+
+            config.url.full+"/user/"+user.id+"/confirmemail/"+user.token;
+        console.log(message);
+        var message = {
+            from_email: opts.from_email,
+            from_name: opts.from_name,
+            html: emailStr,
+            to: [{
+                email: user.email,
+                name: user.nickname,
+                type: "to"
+            }]
+        };
+        mailer.messages.send({message: message, async: true, ip_pool: "Main Pool" },
+            function(result) {
+                console.log(result);
+            },
+            function(e) {
+                console.log("Error occurred sending email:", e.name, '-', e.message);
+            });
+        callback(null);
     },
     get: function(userid, query, callback) {
         var param = {id: userid};

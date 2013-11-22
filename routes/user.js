@@ -61,9 +61,8 @@ function userRoute(app, User) {
             User.RegisterEmail.bind(User),
             function(new_user, callback) {
                 // TODO: Send a registration email here
-                locals.response = "Success, check your email to confirm your registration!";
-                console.log(new_user);
-                callback(null);
+                locals.response = "Success, check your email in a bit to confirm your registration!";
+                User.SendRegistrationEmail(new_user, callback);
             }
         ], function(err){
             res.send(locals.response);
