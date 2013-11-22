@@ -2,7 +2,10 @@ var db = require('./database'),
     utils = require('./utils'),
     errors = require('./errors').User,
     async = require('async'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    sanitizer = require('sanitizer'),
+    QueryStrings = require('./queryStrings'),
+    Message = require('./clientMessage');
 
 var user = {
     LoginWithEmail: function(email, password, callback) {
@@ -17,10 +20,10 @@ var user = {
             },
             function(rows, fields, cb) {
                 if(rows == null || rows[0] == null) {
-                    cb(new Error(errors.NO_EMAIL), false);
+                    cb(new Message(errors.NO_EMAIL), false);
                 }
                 else if(rows[0].EmailConfirmed < 1) {
-                    cb(new Error(errors.NOT_CONFIRMED), false);
+                    cb(new Message(errors.NOT_CONFIRMED), false);
                 }
                 else {
                     locals.dbuser = rows[0];
@@ -30,28 +33,30 @@ var user = {
             },
             function(canLogin, cb) {
                 if(!canLogin) {
-                    cb(new Error(errors.BAD_PASSWORD), canLogin);
+                    cb(null, false, new Message(errors.BAD_PASSWORD));
                 }
                 else {
-                    var user = { id: locals.dbuser.id, email: locals.dbuser.email, name: locals.dbuser.name };
+                    var user = { id: locals.dbuser.id, email: locals.dbuser.email, nickname: locals.dbuser.nickname };
                     cb(null, user);
                 }
             }
         ], function(err, rows) {
-            db.CleanPool(err, rows, locals.connection, callback);
+            console.log("Error: ", err);
+            console.log("Result: ", rows);
+            db.EndConnection(err, rows, locals.connection, callback);
         });
     },
     VerifyEmailToken: function(userid, token, callback) {
         var checkConfirmed = QueryStrings.User.CHECK_EMAIL_CONFIRMED;
         var queryString = QueryStrings.User.VERIFY_REGISTRATION_TOKEN;
         if(!userid) {
-            return callback(new Error("No user set"));
+            return callback(new Message("No user set"));
         }
         else if(!token) {
-            return callback(new Error("No token given"));
+            return callback(new Message("No token given"));
         }
         else if(!queryString) {
-            return callback(new Error("No query given"));
+            return callback(new Message("No query given"));
         }
 
         var queryParams = { id: userid };
@@ -66,10 +71,10 @@ var user = {
             // Now check if the email has already been confirmed
             function(rows, fields, callback) {
                 if(rows == null || rows[0] == null) {
-                    callback(new Error(errors.NO_ID));
+                    callback(new Message(errors.NO_ID));
                 }
                 else if(rows[0].EmailConfirmed) {
-                    callback(new Error(errors.ALREADY_CONFIRMED));
+                    callback(new Message(errors.ALREADY_CONFIRMED));
                 }
                 else {
                     locals.connection.query(queryString, queryParams, callback);
@@ -78,7 +83,7 @@ var user = {
             // Now compare the tokens
             function(rows, fields, callback) {
                 if(rows == null || rows[0] == null) {
-                    callback (new Error(errors.NO_ID));
+                    callback (new Message(errors.NO_ID));
                 }
                 else {
                     var found_hash = rows[0].emailToken;
@@ -89,7 +94,7 @@ var user = {
             // Finally, make sure to reflect verification in the database
             function(tokenMatches, callback) {
                 if(!tokenMatches) {
-                    callback(new Error(errors.INCORRECT_TOKEN));
+                    callback(new Message(errors.INCORRECT_TOKEN));
                 }
                 else {
                     var queryString = QueryStrings.User.SET_REGISTRATION_VERIFIED;
@@ -99,14 +104,14 @@ var user = {
             },
             function(results, cb) {
                 if(!results || !results.affectedRows) {
-                    callback(new Error(errrors.EXPIRED_TOKEN), false);
+                    callback(new Message(errors.EXPIRED_TOKEN), false);
                 }
                 else {
                     callback(null, true);
                 }
             }
         ], function(err, rows, fields) {
-            db.CleanPool(err, rows, locals.connection, callback);
+            db.EndConnection(err, rows, locals.connection, callback);
         });
     },
     RegisterEmail: function(name, email, password, callback) {
@@ -114,26 +119,26 @@ var user = {
         var clean_name = sanitizer.sanitize(name);
         var locals = {};
         async.waterfall([
-            db.getConnection.bind(db),
+            db.GetConnection.bind(db),
             function(connection, cb) {
                 locals.connection = connection;
                 cb(null, password);
             },
             // Get a password hash
-            this.GenerateHash,
+            db.GenerateHash.bind(db),
             function(hash, cb) {
                 locals.hash = hash;
                 cb(null);
             },
             // Next, generate a unique token
-            this.GenerateToken,
+            db.GenerateToken.bind(db),
             function(token, cb) {
                 var tokenString = token;
                 locals.clean_token = sanitizer.sanitize(tokenString);
                 cb(null, locals.clean_token);
             },
             // Then create a hash of this token
-            this.GenerateHash,
+            db.GenerateHash.bind(db),
             // Now attempt to insert into the database
             function(token_hash, cb) {
                 var post = {email: clean_email, nickname: clean_name, password: locals.hash, emailToken: token_hash};
@@ -149,8 +154,33 @@ var user = {
                     token: locals.clean_token
                 };
             }
-            this.CleanPool(err, user, locals.connection, callback);
-        }.bind(this));
+            db.EndConnection(err, user, locals.connection, callback);
+        });
+    },
+    CheckEmailTaken: function(email, callback) {
+        var clean_email = sanitizer.sanitize(email);
+        var post = {email: clean_email};
+        var locals = {};
+        async.waterfall([
+            db.GetConnection.bind(db),
+            function(connection, cb) {
+                locals.connection = connection;
+                locals.connection.query(QueryStrings.User.CHECK_EXISTING_EMAIL, post, cb);
+            },
+            function(rows, fields, cb) {
+                console.log(rows);
+                // User does exist
+                if(rows[0] && rows[0].email) {
+                    cb(null, true);
+                }
+                // User does not exist
+                else {
+                    cb(null, false);
+                }
+            }
+        ], function(err, results) {
+            db.EndConnection(err, results, locals.connection, callback);
+        });
     },
     get: function(userid, query, callback) {
         var param = {id: userid};
@@ -163,7 +193,7 @@ var user = {
         ], function(err, results){
             console.log(results);
             if(!results || !results[0]) {
-                callback(new Error(errors.NO_ID), null);
+                callback(new Message(errors.NO_ID), null);
             }
             else {
                 callback(err, results);
