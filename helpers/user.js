@@ -153,7 +153,7 @@ var user = {
         }.bind(this));
     },
     get: function(userid, query, callback) {
-        var param['id'] = {userid};
+        var param = {id: userid};
 
         async.waterfall([
             async.apply(utils.cleanInputs, param),
