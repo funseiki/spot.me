@@ -1,3 +1,4 @@
+require('./module')();
 if(process.env.NODE_ENV == 'production')
 {
     console.log("Production");
