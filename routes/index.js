@@ -25,7 +25,7 @@ function routes(app, passport) {
     );
 
     // Do these routes last
-    app.get('/logout', function(req, res) {
+    app.all('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
