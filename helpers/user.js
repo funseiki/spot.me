@@ -189,7 +189,6 @@ var user = {
         var opts = config.mandrillParams;
         var emailStr = "Click the below link to confirm your registration:<br/>"+
             config.url.full+"/user/"+user.id+"/confirmemail/"+user.token;
-        console.log(message);
         var message = {
             from_email: opts.from_email,
             from_name: opts.from_name,
