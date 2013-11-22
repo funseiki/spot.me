@@ -1,9 +1,10 @@
 var express = require('express')
 ,   http = require('http')
 ,   path = require('path')
-,   config = require(path.join(__dirname, 'config'));
-var app = express();
+,   config = require(path.join(__dirname, 'config'))
+,   routes = require(path.join(__dirname, 'routes'));
 
+var app = express();
 app.configure(function()
 {
     var public_path = path.join(__dirname, 'public');
@@ -25,9 +26,7 @@ app.configure(function()
     });
 });
 
-app.get('/', function(req, res) {
-    res.send("The World Says Hello");
-});
+routes(app);
 
 http.createServer(app).listen(app.get('port'), app.get('ip'), function()
 {
