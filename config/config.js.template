@@ -17,3 +17,9 @@ exports.url = {
     ip: "<127.0.0.1>"
     port: <8080>
 };
+
+// Work factor for bcrypt: http://stackoverflow.com/questions/4443476/optimal-bcrypt-work-factor
+//-- tl;dr, should tweak this depending on load. Want to increase this every year or so to follow Moore's 'Law'
+exports.bcryptParams = {
+    workFactor: <Something greater than 10ish>
+};
