@@ -102,7 +102,7 @@ var user = {
                 else {
                     var queryString = QueryStrings.User.SET_REGISTRATION_VERIFIED;
                     var args = [{emailConfirmed: 1}, {id: userid }];
-                    locals.connection.query(queryString, args, cb);
+                    locals.connection.query(queryString, args, callback);
                 }
             },
             function(results, cb) {
