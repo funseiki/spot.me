@@ -3,6 +3,7 @@ var config = require('../config').db,
     mysql = require('mysql'),
     async = require('async'),
     bcrypt = require('bcrypt'),
+    sanitizer = require('sanitizer'),
     crypto = require('crypto');
 
 var database = {
