@@ -23,3 +23,12 @@ exports.url = {
 exports.bcryptParams = {
     workFactor: <Something greater than 10ish>
 };
+
+exports.mandrillParams = {
+    host: "<>",
+    port: <>,
+    user: "<>",
+    key: "<api key>",
+    from_email: "",
+    from_name: ""
+}
