@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Spot.me</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings related to login -->
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_duplicate_email">This email address is already in use</string>
+    <string name="error_duplicate_username">This username is already in use</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_confirm_password">Passwords do not match</string>
+    <string name="error_field_required">This field is required</string>
+ 
+    <string name="signIn">Sign In</string>
+    <string name="submit">Submit</string>
+    <string name="orText">Or</string>
+    <string name="emailHint">Email</string>
+    <string name="usernameHint">Username</string>
+    <string name="passwordHint">Password</string>
+    <string name="confirmPasswordHint">Confirm Password</string>
+    <string name="register">Create account</string>
+    <string name="cancel">Cancel</string>
+    
+    <string name="newSpotTitle">Create a spot</string>
+    <string name="clueHint">Enter your clue/description here</string>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:ignore="ButtonStyle" >
+
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_action_person" />
+
+    <Button
+        android:id="@+id/addSpot"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_action_new" />
+
+    <Button
+        android:id="@+id/leaderboard"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_action_paste" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_action_not_secure" />
+
+</LinearLayout>
