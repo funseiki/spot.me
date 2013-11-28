@@ -9,17 +9,14 @@ function routes(app, passport) {
 
     // Login/logout
     app.get('/failed', function(req, res) {
-        res.send("Login failed");
+        res.json(401, {message: "Login Failed!"});
     });
 
     // The database helper will verify the user
     app.post('/login',
-        passport.authenticate('local',
-        {
+        passport.authenticate('local', {
             failureRedirect: '/failed'
-        }), function(req, res)
-        {
-            //res.redirect('/');
+        }), function(req, res) {
             res.json("Login Successful!");
         }
     );

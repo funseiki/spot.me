@@ -23,10 +23,13 @@ var user = {
             },
             function(rows, fields, cb) {
                 if(rows == null || rows[0] == null) {
-                    cb(new Message(errors.NO_EMAIL), false);
+                    var message = new Message(errors.NO_EMAIL);
+                    // Set error to true so we skip to the bottom
+                    cb(true, false, message);
                 }
                 else if(rows[0].EmailConfirmed < 1) {
-                    cb(new Message(errors.NOT_CONFIRMED), false);
+                    var message = new Message(errors.NOT_CONFIRMED);
+                    cb(true, false, message);
                 }
                 else {
                     locals.dbuser = rows[0];
@@ -43,10 +46,14 @@ var user = {
                     cb(null, user);
                 }
             }
-        ], function(err, rows) {
+        ], function(err, user, message) {
             console.log("Error: ", err);
-            console.log("Result: ", rows);
-            db.EndConnection(err, rows, locals.connection, callback);
+            console.log("Result: ", user);
+            // I guess this is kinda hacky. Might want to enforce a stricter interface for sending user error messages
+            // If we have a message, let's go ahead and set error to null
+            if(message) err = null;
+            console.log("Message:", message)
+            db.EndConnection(err, user, locals.connection, callback, message);
         });
     },
     VerifyEmailToken: function(userid, token, callback) {
