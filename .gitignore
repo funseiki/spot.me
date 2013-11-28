@@ -1,6 +1,9 @@
 # /
 /ER_Diagram
 
+# /client/android/
+/client/android/bin/
+
 # /server/
 
 #/server/node_modules
