@@ -17,9 +17,9 @@ var database = {
     ,   waitForConnections         : config.waitForConnections
     ,   connectionLimit            : config.connectionLimit
     }),
-    EndConnection: function(err, results, connection, callback, extras) {
+    EndConnection: function(err, results, connection, callback) {
         if(connection) connection.release();
-        callback(err, results, extras);
+        callback(err, results);
     },
     GetConnection: function(callback) {
         this.pool.getConnection(callback);

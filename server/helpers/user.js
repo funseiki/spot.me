@@ -52,8 +52,9 @@ var user = {
             // I guess this is kinda hacky. Might want to enforce a stricter interface for sending user error messages
             // If we have a message, let's go ahead and set error to null
             if(message) err = null;
-            console.log("Message:", message)
-            db.EndConnection(err, user, locals.connection, callback, message);
+            db.EndConnection(err, user, locals.connection, function(err, result) {
+                callback(err, user, message);
+            });
         });
     },
     VerifyEmailToken: function(userid, token, callback) {
