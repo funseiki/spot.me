@@ -4,9 +4,10 @@
 # /client/android/
 /client/android/bin/
 /client/android/.DS_Store
+/client/.DS_Store
+/.DS_Store
 /config/
 /node_modules/
-
 # /server/
 
 #/server/node_modules
