@@ -8,6 +8,10 @@
 /.DS_Store
 /config/
 /node_modules/
+/client/android/.metadata/
+/client/android/.settings/
+/client/android/.classpath
+
 # /server/
 
 #/server/node_modules
