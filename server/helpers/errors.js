@@ -15,7 +15,11 @@ var Database = {
 
 var Errors = {
     User: User,
-    Database: Database
+    Database: Database,
+    Log: function(message) {
+        // Log more betterer
+        console.log(message);
+    }
 }
 
 module.exports = Errors;

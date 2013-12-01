@@ -4,7 +4,8 @@ var config = require('../config').db,
     async = require('async'),
     bcrypt = require('bcrypt'),
     sanitizer = require('sanitizer'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    errors = require('./errors');
 
 var database = {
     pool: mysql.createPool({
