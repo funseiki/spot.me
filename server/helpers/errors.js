@@ -7,19 +7,24 @@ var User = {
     ALREADY_CONFIRMED: "This user has already confirmed",
     INCORRECT_TOKEN: "Incorrect Token",
     EXPIRED_TOKEN: "The token has expired"
-}
+};
+
+var Spot = {
+
+};
 
 var Database = {
     GENERIC: "Unable to access information at this time"
-}
+};
 
 var Errors = {
     User: User,
     Database: Database,
+    Spot: Spot,
     Log: function(message) {
         // Log more betterer
         console.log(message);
     }
-}
+};
 
 module.exports = Errors;

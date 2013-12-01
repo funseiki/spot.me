@@ -5,8 +5,13 @@ var User = {
 ,   CHECK_EMAIL_CONFIRMED     : 'SELECT emailConfirmed FROM users WHERE ?'
 ,   CHECK_EXISTING_EMAIL      : 'SELECT email FROM users WHERE ?'
 ,   VERIFY_LOGIN              : 'SELECT U.id, U.nickname, U.email, U.password, U.emailConfirmed FROM users U WHERE ?'
-}
+};
+
+var Spot = {
+
+};
 
 module.exports = {
-    User: User
-}
+    User: User,
+    Spot: Spot
+};
