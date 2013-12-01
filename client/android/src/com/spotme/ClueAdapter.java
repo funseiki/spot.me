@@ -1,9 +1,7 @@
 package com.spotme;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,37 +44,50 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 		return result;
 	}
 
+	private static class ViewHolder {
+		private ImageView imageView;
+		private Bitmap bitmap;
+		private String imageURL;
+
+		public ViewHolder(ImageView iv, Bitmap bm, String url) {
+			this.imageView = iv;
+			this.bitmap = bm;
+			this.imageURL = url;
+		}
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.row_layout, parent, false);
-		TextView clueView = (TextView) rowView.findViewById(R.id.clue);
-		TextView spotIdView = (TextView) rowView.findViewById(R.id.spotId);
-		ImageView imgView = (ImageView) rowView.findViewById(R.id.img);
+
 		JSONObject obj = objs[position];
 
+		String imgSrc = getDataFromJsonObj(obj, "imgSrc");
 		String clue = getDataFromJsonObj(obj, "clue");
 		String spotId = getDataFromJsonObj(obj, "spotId");
-		String imgSrc = getDataFromJsonObj(obj, "imgSrc");
 
+		ViewHolder viewHolder = null;
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.row_layout, null);
+			ImageView imgView = (ImageView) convertView.findViewById(R.id.img);
+
+			viewHolder = new ViewHolder(imgView, null, imgSrc);
+			viewHolder.imageView = (ImageView) convertView
+					.findViewById(R.id.img);
+			convertView.setTag(viewHolder);
+		}
+		TextView clueView = (TextView) convertView.findViewById(R.id.clue);
+		TextView spotIdView = (TextView) convertView.findViewById(R.id.spotId);
 		clueView.setText(clue);
 		spotIdView.setText(spotId);
 
-		LoadImageAsyncTask load = new LoadImageAsyncTask();
-		Bitmap bm = null;
-		try {
-			bm = load.execute(imgSrc).get();
-		} catch (InterruptedException e) {
-			Log.i(TAG, "async task interrupted");
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			Log.i(TAG, "async task execution failed");
-			e.printStackTrace();
-		}
-		imgView.setImageBitmap(bm);
+		viewHolder = (ViewHolder) convertView.getTag();
 
-		return rowView;
+		new DownloadAsyncTask().execute(viewHolder);
+
+		return convertView;
 	}
 
 	public Context getContext() {
@@ -91,27 +102,31 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 		return resource;
 	}
 
-	private class LoadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
+	private class DownloadAsyncTask extends
+			AsyncTask<ViewHolder, Void, ViewHolder> {
 
 		@Override
-		protected Bitmap doInBackground(String... params) {
-			String url = params[0];
-			URL imgURL = null;
-			Bitmap bm = null;
+		protected ViewHolder doInBackground(ViewHolder... params) {
+			ViewHolder viewHolder = params[0];
 			try {
-				imgURL = new URL(url);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				Log.i(TAG, "invalid URL");
-			}
-			try {
-				bm = BitmapFactory.decodeStream(imgURL.openStream());
+				URL imageURL = new URL(viewHolder.imageURL);
+				viewHolder.bitmap = BitmapFactory.decodeStream(imageURL
+						.openStream());
 			} catch (IOException e) {
-				Log.i(TAG, "error downloading");
-				e.printStackTrace();
+				Log.e("error", "Downloading Image Failed");
+				viewHolder.bitmap = null;
 			}
-			return bm;
+
+			return viewHolder;
+		}
+
+		@Override
+		protected void onPostExecute(ViewHolder result) {
+			if (result.bitmap == null) {
+				result.imageView.setImageResource(R.drawable.ic_launcher);
+			} else {
+				result.imageView.setImageBitmap(result.bitmap);
+			}
 		}
 	}
-
 }

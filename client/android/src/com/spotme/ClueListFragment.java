@@ -25,9 +25,9 @@ public class ClueListFragment extends ListFragment {
 		}
 		JSONObject two = new JSONObject();
 		try {
-			two.put("clue", "hello world");
+			two.put("clue", "yolo");
 			two.put("imgSrc",
-					"http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png");
+					"http://icons.iconarchive.com/icons/deleket/button/256/Button-Next-icon.png");
 			two.put("spotId", "123");
 		} catch (JSONException e) {
 			e.printStackTrace();
