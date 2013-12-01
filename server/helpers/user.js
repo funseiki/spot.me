@@ -205,6 +205,7 @@ var user = {
             from_email: opts.from_email,
             from_name: opts.from_name,
             html: emailStr,
+            subject: "Spot.Me Registration Confirmation",
             to: [{
                 email: user.email,
                 name: user.nickname,
