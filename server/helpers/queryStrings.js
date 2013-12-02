@@ -8,7 +8,7 @@ var User = {
 };
 
 var Spot = {
-
+    CREATE : 'INSERT INTO spots SET ?'
 };
 
 module.exports = {

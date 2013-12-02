@@ -13,6 +13,8 @@ app.configure(function()
     var public_path = path.join(__dirname, 'public');
     app.set('port', config.url.port);
     app.set('ip', config.url.ip);
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'jade');
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());

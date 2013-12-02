@@ -6,6 +6,7 @@ function routes(app, passport) {
 
     // Routes
     require('./user')(app, controllers.User);
+    require('./spot')(app, controllers.Spot);
 
     // Login/logout
     app.get('/failed', function(req, res) {
@@ -28,7 +29,7 @@ function routes(app, passport) {
     });
 
     app.get('/', function(req, res){
-        res.send("Ello Mate");
+        res.render("imageform");
     });
 }
 
