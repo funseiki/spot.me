@@ -23,6 +23,9 @@
     <string name="register">Create account</string>
     <string name="cancel">Cancel</string>
     
+    <string name="topTenMsg">Top Ten in </string>
+    <string name="unlockedMsg">( You\'ve unlocked </string>
+    <string name="endUnlockedMsg"> /10)</string>
     <string name="newSpotTitle">Create a spot</string>
     <string name="clueHint">Enter your clue/description here</string>
     
@@ -36,4 +39,6 @@
 	<color name="white">#FFFFFF</color>
 	<color name="greyText">#777777</color>  
     <color name="hlbtn">#487890</color>
+    <color name="blackText">#222222</color>
+    <color name="secTextColor">#cccccc</color>
 </resources>
