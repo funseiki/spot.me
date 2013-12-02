@@ -62,6 +62,36 @@ var database = {
             }
         });
     },
+    StartTransaction: function(callback) {
+        var locals = {};
+        async.waterfall([
+            this.GetConnection.bind(this),
+            function(connection, callback) {
+                locals.connection = connection;
+                locals.connection.beginTransaction(callback);
+            }
+        ], function(err){
+            callback(err, locals.connection);
+        });
+    },
+    EndTransaction: function(err, results, connection, callback) {
+        async.waterfall([
+            // Commit or rollback
+            function(callback) {
+                if(err) {
+                    connection.rollback(function(){
+                        callback(err);
+                    });
+                }
+                else {
+                    connection.commit(callback);
+                }
+            },
+        ], function(err, result) {
+            // Return the connection to the pool
+            this.EndConnection(err, result, connection, callback);
+        }.bind(this));
+    },
     Query: function(queryString, inputs, callback) {
         var locals = {};
         async.waterfall([
