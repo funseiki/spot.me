@@ -33,10 +33,12 @@
     <string name="cancel">Cancel</string>
     
    	<string name="failedMsg">You\'re </string>
-   	<string name="miles">miles away</string>
+   	<string name="milesStr">miles away</string>
    	<string name="failedMsgEnd">from the spot!</string>
     <string name="back">Back</string>
-        
+    
+    <string name="verifiedMsg">Verified!</string>    
+    <string name="send">Send</string>
     <color name="menuBg">#9dd1eb</color>
     <color name="highightedButton">#487890</color>
     <color name="headerBg">#9dd1eb</color>

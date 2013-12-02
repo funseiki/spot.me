@@ -28,10 +28,10 @@
 			android:textColor="@color/hlText"/>
     
         <TextView
-	        android:id="@+id/miles"
+	        android:id="@+id/milesStr"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/miles" 
+			android:text="@string/milesStr" 
 			android:textSize="@dimen/normal_text_size"
 			android:textColor="@color/buttonBorder"/>
     </LinearLayout>
