@@ -8,9 +8,20 @@ var check = require('validator').check,
 
 function spotRoute(app, Spot) {
     app.post('/spot/create', function(req, res) {
+        // TODO: Change this
+        var user = {id: 12};
+
         var imagePath = req.files.file.path,
             imageName = req.files.file.originalFilename;
-        Spot.create(req.user, {imagePath: imagePath, imageName: imageName}, function(err, resp){
+        var new_spot = {
+            latitude : req.body.latitude,
+            longitude : req.body.longitude,
+            clue : req.body.clue,
+            imagePath: imagePath,
+            imageName: imageName,
+            story: "Here's a story " // We're not using this yet
+        };
+        Spot.create(user, new_spot, function(err, resp){
             if(err) {
                 res.send("Error uploading file :(");
             }
