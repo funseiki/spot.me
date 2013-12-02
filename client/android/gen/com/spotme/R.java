@@ -21,6 +21,7 @@ public final class R {
         public static final int hlText=0x7f060006;
         public static final int hlbtn=0x7f060009;
         public static final int menuBg=0x7f060000;
+        public static final int popupBg=0x7f06000c;
         public static final int secTextColor=0x7f06000b;
         public static final int white=0x7f060007;
     }
@@ -33,57 +34,72 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f040000;
         public static final int activity_vertical_margin=0x7f040001;
+        public static final int button_margin=0x7f040008;
+        public static final int button_width=0x7f040006;
+        public static final int large_button_width=0x7f040007;
+        public static final int large_text_size=0x7f040005;
+        public static final int normal_text_size=0x7f040004;
         public static final int regi_item_width=0x7f040002;
         public static final int sec_text_size=0x7f040003;
+        public static final int verify_img_size=0x7f04000a;
+        public static final int verify_margin_top=0x7f040009;
     }
     public static final class drawable {
         public static final int button_bg_round=0x7f020000;
-        public static final int ic_action_accept=0x7f020001;
-        public static final int ic_action_camera=0x7f020002;
-        public static final int ic_action_cancel=0x7f020003;
-        public static final int ic_action_new=0x7f020004;
-        public static final int ic_action_not_secure=0x7f020005;
-        public static final int ic_action_paste=0x7f020006;
-        public static final int ic_action_person=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int login_logo=0x7f020009;
-        public static final int main_logo=0x7f02000a;
-        public static final int main_new_location=0x7f02000b;
-        public static final int main_profile=0x7f02000c;
-        public static final int main_spots=0x7f02000d;
-        public static final int text_box_bg=0x7f02000e;
-        public static final int text_box_bg_round=0x7f02000f;
-        public static final int text_box_first_row=0x7f020010;
-        public static final int text_box_last_row=0x7f020011;
+        public static final int button_white_bg_round=0x7f020001;
+        public static final int failed=0x7f020002;
+        public static final int ic_action_accept=0x7f020003;
+        public static final int ic_action_camera=0x7f020004;
+        public static final int ic_action_cancel=0x7f020005;
+        public static final int ic_action_new=0x7f020006;
+        public static final int ic_action_not_secure=0x7f020007;
+        public static final int ic_action_paste=0x7f020008;
+        public static final int ic_action_person=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int login_logo=0x7f02000b;
+        public static final int main_logo=0x7f02000c;
+        public static final int main_new_location=0x7f02000d;
+        public static final int main_profile=0x7f02000e;
+        public static final int main_spots=0x7f02000f;
+        public static final int text_box_bg=0x7f020010;
+        public static final int text_box_bg_round=0x7f020011;
+        public static final int text_box_first_row=0x7f020012;
+        public static final int text_box_last_row=0x7f020013;
+        public static final int verified=0x7f020014;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001a;
+        public static final int action_settings=0x7f09001f;
         public static final int addSpot=0x7f09000e;
         public static final int btn_login=0x7f090002;
         public static final int btn_signup=0x7f090004;
         public static final int cancel=0x7f090014;
         public static final int clue=0x7f090010;
         public static final int cluelist=0x7f09000b;
-        public static final int confirmPassword=0x7f090015;
+        public static final int confirmPassword=0x7f090018;
         public static final int control=0x7f090005;
         public static final int email=0x7f090000;
+        public static final int faileMsgEnd=0x7f09001e;
         public static final int imageView1=0x7f09000c;
-        public static final int img=0x7f090017;
+        public static final int img=0x7f09001a;
+        public static final int invalid=0x7f09001c;
         public static final int leaderboard=0x7f09000f;
+        public static final int locationName=0x7f090016;
+        public static final int miles=0x7f09001d;
         public static final int orText=0x7f090003;
         public static final int password=0x7f090001;
         public static final int preview=0x7f090012;
         public static final int profile=0x7f09000d;
         public static final int sendCreateRequest=0x7f090013;
-        public static final int spotId=0x7f090018;
+        public static final int spotId=0x7f09001b;
         public static final int takePhoto=0x7f090011;
         public static final int textView1=0x7f090006;
         public static final int textView2=0x7f090007;
         public static final int textView3=0x7f090008;
         public static final int textView4=0x7f090009;
         public static final int textView5=0x7f09000a;
-        public static final int username=0x7f090016;
-        public static final int verify=0x7f090019;
+        public static final int unlockConfirmStr=0x7f090015;
+        public static final int username=0x7f090019;
+        public static final int verify=0x7f090017;
     }
     public static final class layout {
         public static final int clue_list=0x7f030000;
@@ -91,11 +107,12 @@ public final class R {
         public static final int main=0x7f030002;
         public static final int main_control=0x7f030003;
         public static final int new_spot=0x7f030004;
-        public static final int register=0x7f030005;
-        public static final int row_layout=0x7f030006;
-        public static final int verify_correct=0x7f030007;
-        public static final int verify_incorrect=0x7f030008;
-        public static final int verify_spot=0x7f030009;
+        public static final int popup=0x7f030005;
+        public static final int register=0x7f030006;
+        public static final int row_layout=0x7f030007;
+        public static final int verify_correct=0x7f030008;
+        public static final int verify_incorrect=0x7f030009;
+        public static final int verify_spot=0x7f03000a;
     }
     public static final class menu {
         public static final int login=0x7f080000;
@@ -103,11 +120,13 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int cancel=0x7f050011;
-        public static final int clueHint=0x7f050016;
+        public static final int back=0x7f05001c;
+        public static final int cancel=0x7f050018;
+        public static final int clueHint=0x7f050015;
+        public static final int confirm=0x7f050017;
         public static final int confirmPasswordHint=0x7f05000f;
         public static final int emailHint=0x7f05000c;
-        public static final int endUnlockedMsg=0x7f050014;
+        public static final int endUnlockedMsg=0x7f050013;
         public static final int error_duplicate_email=0x7f050003;
         public static final int error_duplicate_username=0x7f050004;
         public static final int error_field_required=0x7f050008;
@@ -117,14 +136,18 @@ public final class R {
          */
         public static final int error_invalid_email=0x7f050002;
         public static final int error_invalid_password=0x7f050006;
-        public static final int newSpotTitle=0x7f050015;
+        public static final int failedMsg=0x7f050019;
+        public static final int failedMsgEnd=0x7f05001b;
+        public static final int miles=0x7f05001a;
+        public static final int newSpotTitle=0x7f050014;
         public static final int orText=0x7f05000b;
         public static final int passwordHint=0x7f05000e;
         public static final int register=0x7f050010;
         public static final int signIn=0x7f050009;
         public static final int submit=0x7f05000a;
-        public static final int topTenMsg=0x7f050012;
-        public static final int unlockedMsg=0x7f050013;
+        public static final int topTenMsg=0x7f050011;
+        public static final int unlockConfirm=0x7f050016;
+        public static final int unlockedMsg=0x7f050012;
         public static final int usernameHint=0x7f05000d;
     }
     public static final class style {
