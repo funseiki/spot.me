@@ -11,7 +11,12 @@ var Spot = {
     CREATE : 'INSERT INTO spots SET ?'
 };
 
+var Clue = {
+    CREATE : 'INSERT INTO clues SET ?'
+}
+
 module.exports = {
     User: User,
-    Spot: Spot
+    Spot: Spot,
+    Clue: Clue
 };
