@@ -20,14 +20,14 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
+public class ServerConnection extends AsyncTask<Message, Void, String> {
 
 	public final static String POST_TAG = "POST";
 	public final static String GET_TAG = "GET";
 
-	//private final static String serverURL = "http://127.0.0.1:8080/";
-	//private final static String serverURL = "http://10.0.2.2:8080/";
-	
+	// private final static String serverURL = "http://127.0.0.1:8080/";
+	public final static String serverURL = "http://10.0.2.2:8080/";
+
 	private HttpClient hClient;
 	private HttpPost hPost;
 	private HttpGet hGet;
@@ -94,6 +94,7 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 		return sb.toString();
 	}
 
+	@SuppressWarnings("unused")
 	private JSONObject retrieveJsonObj() {
 		JSONObject obj = null;
 		try {
@@ -103,16 +104,15 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 		}
 		return obj;
 	}
-
 	@Override
-	protected JSONObject doInBackground(Message... params) {
+	protected String doInBackground(Message... params) {
 		Message m = params[0];
-		if (m.getType().equals(GET_TAG)){
+		if (m.getType().equals(GET_TAG)) {
 			getData(m.getUrl());
 		}
-		if (m.getType().equals(POST_TAG)){
+		if (m.getType().equals(POST_TAG)) {
 			postData(m.getNameValuePairs(), m.getUrl());
 		}
-		return retrieveJsonObj();
+		return retrieveData();
 	}
 }

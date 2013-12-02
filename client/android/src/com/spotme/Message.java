@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 
 public class Message {
-	
+
 	private String type;
 	private String url;
 	private List<NameValuePair> nameValuePairs;
@@ -14,9 +14,12 @@ public class Message {
 
 	/**
 	 * Message constructor
-	 * @param type ServerConnection.GET_TAG or ServerConnection.POST_TAG
-	 * @param url  
-	 * @param num number of name value pair in the request
+	 * 
+	 * @param type
+	 *            ServerConnection.GET_TAG or ServerConnection.POST_TAG
+	 * @param url
+	 * @param num
+	 *            number of name value pair in the request
 	 */
 	public Message(String type, String url, int num) {
 		setNumOfEntry(num);
