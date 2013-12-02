@@ -20,6 +20,9 @@
     "async": "*",
     "optimist": "*",
     "mysql" : "*",
-    "mandrill-api": "*"
+    "mandrill-api": "*",
+    "aws-sdk": "*",
+    "knox": "*",
+    "mmmagic" : "*"
   }
 }
