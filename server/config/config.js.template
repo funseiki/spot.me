@@ -32,3 +32,12 @@ exports.mandrillParams = {
     from_email: "",
     from_name: ""
 }
+
+exports.aws = {
+    keys : {
+        accessKeyId: "teehee",
+        secretAccessKey: "teeheehee",
+        region: "yo-mama"
+    },
+    bucket: "ferizzle"
+};
