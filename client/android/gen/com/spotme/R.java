@@ -14,10 +14,13 @@ public final class R {
         public static final int buttonBg=0x7f060004;
         public static final int buttonBorder=0x7f060003;
         public static final int buttonText=0x7f060005;
+        public static final int greyText=0x7f060008;
         public static final int headerBg=0x7f060002;
         public static final int highightedButton=0x7f060001;
         public static final int hlText=0x7f060006;
+        public static final int hlbtn=0x7f060009;
         public static final int menuBg=0x7f060000;
+        public static final int white=0x7f060007;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -28,6 +31,7 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f040000;
         public static final int activity_vertical_margin=0x7f040001;
+        public static final int regi_item_width=0x7f040002;
     }
     public static final class drawable {
         public static final int button_bg_round=0x7f020000;
@@ -46,9 +50,8 @@ public final class R {
         public static final int text_box_last_row=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f090016;
+        public static final int action_settings=0x7f090015;
         public static final int addSpot=0x7f090008;
-        public static final int btn_cancelReg=0x7f090012;
         public static final int btn_login=0x7f090002;
         public static final int btn_signup=0x7f090004;
         public static final int cancel=0x7f09000f;
@@ -57,7 +60,7 @@ public final class R {
         public static final int confirmPassword=0x7f090010;
         public static final int control=0x7f090005;
         public static final int email=0x7f090000;
-        public static final int img=0x7f090013;
+        public static final int img=0x7f090012;
         public static final int leaderboard=0x7f090009;
         public static final int logout=0x7f09000a;
         public static final int orText=0x7f090003;
@@ -65,10 +68,10 @@ public final class R {
         public static final int preview=0x7f09000d;
         public static final int profile=0x7f090007;
         public static final int sendCreateRequest=0x7f09000e;
-        public static final int spotId=0x7f090014;
+        public static final int spotId=0x7f090013;
         public static final int takePhoto=0x7f09000c;
         public static final int username=0x7f090011;
-        public static final int verify=0x7f090015;
+        public static final int verify=0x7f090014;
     }
     public static final class layout {
         public static final int clue_list=0x7f030000;

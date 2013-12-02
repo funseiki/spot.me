@@ -31,7 +31,9 @@
     <color name="headerBg">#9dd1eb</color>
 	<color name="buttonBorder">#777777</color>  
 	<color name="buttonBg">#487890</color>
-	<color name="buttonText">#cccccc</color>
+	<color name="buttonText">#EEEEEE</color>
 	<color name="hlText">#eb864a</color>
-    
+	<color name="white">#FFFFFF</color>
+	<color name="greyText">#777777</color>  
+    <color name="hlbtn">#487890</color>
 </resources>
