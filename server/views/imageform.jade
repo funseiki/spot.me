@@ -4,5 +4,8 @@ html
 
     body
         form(action='/spot/create', method='POST', enctype="multipart/form-data")
+            input(type="text", placeholder="latitude", name="latitude")
+            input(type="text", placeholder="longitude", name="longitude")
+            input(type="text", placeholder="clue", name="clue")
             input(type="file", name="file")
             input(type='submit')
