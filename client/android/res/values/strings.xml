@@ -37,6 +37,9 @@
    	<string name="failedMsgEnd">from the spot!</string>
     <string name="back">Back</string>
     
+    <string name="hintHint">Hint</string>
+    <string name="spotHint">Spot</string>
+    
     <string name="verifiedMsg">Verified!</string>    
     <string name="send">Send</string>
     <color name="menuBg">#9dd1eb</color>

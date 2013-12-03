@@ -21,7 +21,7 @@
 	    android:layout_height="wrap_content"
 	    android:background="@color/headerBg"
 	    android:orientation="horizontal" 
-	    android:layout_marginRight="15dp"
+	    android:layout_marginRight="@dimen/header_right_margin"
 	    android:layout_marginTop="12dp"
 	    android:layout_alignParentRight="true">
 	

@@ -3,70 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:ignore="ContentDescription,ButtonStyle" >
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:text="@string/newSpotTitle"
-        android:textSize="30sp" />
+        android:layout_height="wrap_content" 
+        android:background="@drawable/new_spot_header_bg"
+        android:paddingRight="@dimen/header_right_margin"
+        android:layout_marginTop="8dp">
+       
+        
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+        <Button
+	        android:id="@+id/camera"
+	        android:layout_width="44dp"
+	        android:layout_height="44dp"
+	        android:background="@drawable/camera"/>
+	    <Button
+	        android:id="@+id/gallery"
+	        android:layout_width="45dp"
+	        android:layout_height="44dp"
+	        android:layout_marginLeft="3dp"
+    	    android:layout_marginTop="2dp"
+	        android:background="@drawable/newspot_gallery" />
+	    </LinearLayout>	
+	</RelativeLayout>
+
+    <LinearLayout
+	    android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	android:layout_gravity="center"
+    	android:layout_marginTop="80dp">
 
     <EditText
-        android:id="@+id/clue"
+        android:id="@+id/hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/text_box_bg_round"
-        android:hint="@string/clueHint"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:minLines="2"
-        android:scrollbars="vertical" />
+        android:layout_marginTop="@dimen/normal_margin_top"
+        android:ems="10" 
+        android:hint="@string/hintHint">
+        <requestFocus/>
+    </EditText>
 
-    <Button
-        android:id="@+id/takePhoto"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/ic_action_camera"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
-
-    <ImageView
-        android:id="@+id/preview"
+    <EditText
+        android:id="@+id/spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/text_box_bg_round"
-        android:contentDescription=""
-        android:minHeight="200dp"
-        android:paddingBottom="10dp" />
+        android:layout_marginTop="@dimen/normal_margin_top"
+        
+        android:ems="10" 
+        android:hint="@string/spotHint"/>
 
-    <RelativeLayout
+    
+    <Gallery
+        android:id="@+id/gallery1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingTop="10dp" >
-
-        <Button
-            android:id="@+id/sendCreateRequest"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
-            android:background="@drawable/ic_action_accept" />
-
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="230dp"
-            android:background="@drawable/ic_action_cancel" />
-    </RelativeLayout>
-
+        android:layout_height="100dp" 
+        android:layout_marginTop="@dimen/normal_margin_top"/>
+    
+  
+	<LinearLayout 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal" 
+		android:layout_marginTop="15dp"
+		android:layout_gravity="center">
+		<Button
+		  android:id="@+id/send"
+		  android:layout_width="@dimen/button_width"
+		  android:layout_height="wrap_content"
+		  android:text="@string/send" 
+		  android:textColor="@color/buttonText"
+		  android:textSize="@dimen/large_text_size"
+		  android:background="@drawable/button_bg_round"/>    
+		<Button
+		  android:id="@+id/back"
+		  android:layout_width="@dimen/button_width"
+		  android:layout_height="wrap_content"
+		  android:text="@string/back" 
+		  android:textColor="@color/buttonBorder"
+		  android:textSize="@dimen/large_text_size"
+		  android:background="@drawable/button_white_bg_round"
+		  android:layout_marginLeft="@dimen/button_margin"/>    
+	</LinearLayout>  
+    
+    </LinearLayout>
 </LinearLayout>
