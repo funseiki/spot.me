@@ -17,15 +17,25 @@ function routes(app, passport) {
     });
 
     // The database helper will verify the user
-    app.post('/login',
-        passport.authenticate('local', {
-            failureRedirect: '/failed'
-        }), function(req, res) {
-            res.json({
-                login_success: true
+    app.post('/login', function(req, res, next) {
+        passport.authenticate('local', function(err, user, info){
+            if(err) {return next(err); }
+            var responseObj = { };
+            if(!user) {
+                responseObj.login_success = false;
+                responseObj.message = info.message;
+                return res.json(responseObj);
+            }
+            req.logIn(user, function(err){
+                if(err) {
+                    return next(err);
+                }
+                responseObj.login_success = true;
+                responseObj.userid = user.id;
+                res.json(responseObj);
             });
-        }
-    );
+        })(req, res, next);
+    });
 
     // Do these routes last
     app.all('/logout', function(req, res) {
