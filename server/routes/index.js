@@ -10,7 +10,10 @@ function routes(app, passport) {
 
     // Login/logout
     app.get('/failed', function(req, res) {
-        res.json(401, {message: "Login Failed!"});
+        res.json(401, {
+            login_success: false,
+            message: "Login Failed!"
+        });
     });
 
     // The database helper will verify the user
@@ -18,7 +21,9 @@ function routes(app, passport) {
         passport.authenticate('local', {
             failureRedirect: '/failed'
         }), function(req, res) {
-            res.json("Login Successful!");
+            res.json({
+                login_success: true
+            });
         }
     );
 
