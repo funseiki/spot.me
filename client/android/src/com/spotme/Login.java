@@ -1,7 +1,6 @@
 package com.spotme;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -23,25 +22,6 @@ public class Login extends Activity {
 		setContentView(R.layout.login);
 		loginButtonSetup();
 		signupButtonSetup();
-	}
-
-	/**
-	 * send the request and get back the result string
-	 * 
-	 * @param m
-	 *            message
-	 * @return response in string format
-	 */
-	public String sendRequest(Message m) {
-		String result = null;
-		try {
-			result = new ServerConnection().execute(m).get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		return result;
 	}
 
 	public void signupButtonSetup() {
@@ -73,7 +53,7 @@ public class Login extends Activity {
 				pairs.add(new BasicNameValuePair("password", pwd.getText()
 						.toString()));
 
-				String str = sendRequest(m);
+				String str = Utils.sendRequest(m);
 				Toast.makeText(getApplicationContext(), (CharSequence) str,
 						Toast.LENGTH_SHORT).show();
 			}

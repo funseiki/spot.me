@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class ServerConnection extends AsyncTask<Message, Void, String> {
+public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 
 	public final static String POST_TAG = "POST";
 	public final static String GET_TAG = "GET";
@@ -94,7 +94,6 @@ public class ServerConnection extends AsyncTask<Message, Void, String> {
 		return sb.toString();
 	}
 
-	@SuppressWarnings("unused")
 	private JSONObject retrieveJsonObj() {
 		JSONObject obj = null;
 		try {
@@ -104,8 +103,9 @@ public class ServerConnection extends AsyncTask<Message, Void, String> {
 		}
 		return obj;
 	}
+
 	@Override
-	protected String doInBackground(Message... params) {
+	protected JSONObject doInBackground(Message... params) {
 		Message m = params[0];
 		if (m.getType().equals(GET_TAG)) {
 			getData(m.getUrl());
@@ -113,6 +113,6 @@ public class ServerConnection extends AsyncTask<Message, Void, String> {
 		if (m.getType().equals(POST_TAG)) {
 			postData(m.getNameValuePairs(), m.getUrl());
 		}
-		return retrieveData();
+		return retrieveJsonObj();
 	}
 }

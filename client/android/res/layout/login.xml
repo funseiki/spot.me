@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/menuBg">
+    android:background="@color/menuBg"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription" >
 
     <ImageView 
         android:layout_width="180dp"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
+        android:paddingBottom="5dp"
         android:textColor="@color/greyText"
         android:text="@string/orText" />
 

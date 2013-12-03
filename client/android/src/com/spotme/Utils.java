@@ -2,7 +2,10 @@ package com.spotme;
 
 import java.util.concurrent.ExecutionException;
 
+import org.json.JSONObject;
+
 public class Utils {
+
 	/**
 	 * send the request and get back the result string
 	 * 
@@ -11,7 +14,7 @@ public class Utils {
 	 * @return response in string format
 	 */
 	public static String sendRequest(Message m) {
-		String result = null;
+		JSONObject result = null;
 		try {
 			result = new ServerConnection().execute(m).get();
 		} catch (InterruptedException e) {
@@ -19,7 +22,7 @@ public class Utils {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return result.toString();
 	}
 
 }

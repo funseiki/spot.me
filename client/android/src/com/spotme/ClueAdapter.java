@@ -85,7 +85,7 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 
 		viewHolder = (ViewHolder) convertView.getTag();
 
-		//new DownloadAsyncTask().execute(viewHolder);
+		new DownloadAsyncTask().execute(viewHolder);
 
 		return convertView;
 	}
