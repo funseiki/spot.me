@@ -40,8 +40,15 @@
     <string name="hintHint">Hint</string>
     <string name="spotHint">Spot</string>
     
+    <string name="imgDescription">Image</string>
+    
     <string name="verifiedMsg">Verified!</string>    
     <string name="send">Send</string>
+    <string name="unSpot">Unlocked Spots: </string>
+    <string name="givenUp">Given Up: </string>
+    <string name="logOut">Log out</string>
+    <string name="recentFound">Recent Found Spots: </string>    
+    
     <color name="menuBg">#9dd1eb</color>
     <color name="highightedButton">#487890</color>
     <color name="headerBg">#9dd1eb</color>
@@ -55,4 +62,5 @@
     <color name="blackText">#222222</color>
     <color name="secTextColor">#cccccc</color>
     <color name="popupBg">#e0e0e0</color>
+    <color name="logOutText">#5995b3</color>
 </resources>

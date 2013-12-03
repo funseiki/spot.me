@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        
+	   <LinearLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="20dp"
+	        android:orientation="vertical"
+	        android:layout_alignParentLeft="true">        
+	       <ImageView
+		        android:id="@+id/profile"
+		        android:layout_width="80dp"
+		        android:layout_height="80dp"
+		        android:src="@drawable/profile_default"
+		        android:contentDescription="@string/imgDescription" />
+			<TextView 
+			    android:id="@+id/logout"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:text="@string/logOut"
+			    android:textSize="@dimen/small_text_size"
+			    android:textColor="@color/logOutText"/>
+       	</LinearLayout>	        
+
+	   	<LinearLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="20dp"
+	        android:orientation="vertical"
+	        android:layout_alignParentRight="true">
+	        
+		    <TextView
+		        android:id="@+id/username"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="@dimen/large_text_size"
+			    android:textColor="@color/greyText"
+		        android:text="PTu"/>   
+		    <LinearLayout 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+			    <TextView 
+			        android:id="@+id/unlock"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+				    android:textSize="@dimen/normal_text_size"
+				    android:textColor="@color/greyText"
+			        android:text="@string/unSpot"/>      
+			     <TextView 
+			        android:id="@+id/unlock_num"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+				    android:textSize="@dimen/normal_text_size"
+				    android:textColor="@color/hlText"
+			        android:text="100"/>
+	   		</LinearLayout>
+	  
+		    <LinearLayout 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+			    <TextView 
+			        android:id="@+id/givenUp"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+				    android:textSize="@dimen/normal_text_size"
+				    android:textColor="@color/greyText"
+			        android:text="@string/givenUp"/>      
+			     <TextView 
+			        android:id="@+id/givenUp_num"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+				    android:textSize="@dimen/normal_text_size"
+				    android:textColor="@color/hlText"
+			        android:text="20"/>
+	   		</LinearLayout>
+	    </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/recentfound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+	    android:textSize="@dimen/normal_text_size"
+	    android:textColor="@color/greyText"
+        android:text="@string/recentFound"/>
+
+    <Gallery
+        android:id="@+id/gallery1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
