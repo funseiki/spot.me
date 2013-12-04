@@ -55,6 +55,7 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 			e.printStackTrace();
 		} catch (IOException e) {
 			Log.i(POST_TAG, "error I/O");
+			Log.i(POST_TAG, url);
 			e.printStackTrace();
 		}
 	}

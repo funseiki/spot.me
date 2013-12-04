@@ -2,6 +2,7 @@ package com.spotme;
 
 import java.util.concurrent.ExecutionException;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Utils {
@@ -22,7 +23,14 @@ public class Utils {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-		return result.toString();
+		
+		String str = null;
+		try {
+			str = result.getString("login_success");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return str;
 	}
 
 }
