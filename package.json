@@ -22,7 +22,7 @@
     "mysql" : "*",
     "mandrill-api": "*",
     "aws-sdk": "*",
-    "knox": "*",
-    "mmmagic" : "*"
+    "mmmagic" : "*",
+    "aws2js" : "*"
   }
 }

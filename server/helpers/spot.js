@@ -9,15 +9,9 @@ var db = require('./database'),
     config = require('../config'),
     knox = require('knox'),
     AWS = require('aws-sdk'),
-    path = require('path');
-
-var s3 = new AWS.S3();
-var knoxClient = knox.createClient({
-    key: config.aws.keys.accessKeyId,
-    secret: config.aws.keys.secretAccessKey,
-    region: config.aws.keys.region,
-    bucket: config.aws.bucket
-});
+    path = require('path'),
+    s3 = require('aws2js').load('s3', config.aws.keys.accessKeyId, config.aws.keys.secretAccessKey);
+    s3.setBucket(config.aws.bucket);
 
 var spot = {
     makeImage: function(imageData, s3Folder, main_callback) {
@@ -46,11 +40,7 @@ var spot = {
             async.apply(db.GenerateToken),
             function(token, callback) {
                 locals.url = '/'+ s3Folder+'/' + token + path.extname(locals.clean_image.imageName);
-                knoxClient.putFile(locals.clean_image.imagePath, locals.url, {'x-amz-acl': 'public-read'}, function(err, res){
-                  // Always either do something with `res` or at least call `res.resume()`.
-                    if(res) res.resume();
-                    callback(err, res);
-                }).on('error', function(e){ console.log("makeImage: onError", e); });
+                s3.putFile(locals.url, locals.clean_image.imagePath, 'public-read' , {}, callback);
             }
         ], function(err, res){
             console.log("makeImage: Err", err);
