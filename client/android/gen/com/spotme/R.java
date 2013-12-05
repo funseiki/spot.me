@@ -69,11 +69,12 @@ public final class R {
         public static final int new_spot_header_bg=0x7f020011;
         public static final int newspot_gallery=0x7f020012;
         public static final int profile_default=0x7f020013;
-        public static final int text_box_bg=0x7f020014;
-        public static final int text_box_bg_round=0x7f020015;
-        public static final int text_box_first_row=0x7f020016;
-        public static final int text_box_last_row=0x7f020017;
-        public static final int verified=0x7f020018;
+        public static final int profile_pic=0x7f020014;
+        public static final int text_box_bg=0x7f020015;
+        public static final int text_box_bg_round=0x7f020016;
+        public static final int text_box_first_row=0x7f020017;
+        public static final int text_box_last_row=0x7f020018;
+        public static final int verified=0x7f020019;
     }
     public static final class id {
         public static final int action_settings=0x7f09002f;

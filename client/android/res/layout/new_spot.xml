@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/new_spot_header_bg"
     tools:ignore="ContentDescription,ButtonStyle" >
 
     <RelativeLayout
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content" 
         android:background="@drawable/new_spot_header_bg"
         android:paddingRight="@dimen/header_right_margin"
-        android:layout_marginTop="8dp">
+        android:paddingTop="8dp">
        
         
         <LinearLayout 
