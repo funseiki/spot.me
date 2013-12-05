@@ -5,8 +5,15 @@ import org.json.JSONObject;
 
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ClueListFragment extends ListFragment {
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -38,6 +45,14 @@ public class ClueListFragment extends ListFragment {
 		ClueAdapter adapter = new ClueAdapter(getActivity(),
 				R.layout.row_layout, objects);
 		setListAdapter(adapter);
+	}
+
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		Toast.makeText(getActivity(), "Hello", Toast.LENGTH_LONG).show();
+		TextView tv = (TextView) v.findViewById(R.id.spotId);
+		Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_LONG).show();
+		
 	}
 
 }

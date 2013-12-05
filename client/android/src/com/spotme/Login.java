@@ -56,6 +56,11 @@ public class Login extends Activity {
 				String str = Utils.sendRequest(m);
 				Toast.makeText(getApplicationContext(), (CharSequence) str,
 						Toast.LENGTH_SHORT).show();
+				if (str.equals("true")) {
+					Intent main = new Intent(getApplicationContext(),
+							Main.class);
+					startActivity(main);
+				}
 			}
 		});
 	}
