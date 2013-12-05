@@ -2,6 +2,7 @@
 /ER_Diagram
 /.DS_Store
 /.env
+/node_modules
 
 # /client/
 /client/.DS_Store
