@@ -9,13 +9,6 @@ function routes(app, passport) {
     require('./spot')(app, controllers.Spot);
 
     // Login/logout
-    app.get('/failed', function(req, res) {
-        res.json(401, {
-            login_success: false,
-            message: "Login Failed!"
-        });
-    });
-
     // The database helper will verify the user
     app.post('/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info){
