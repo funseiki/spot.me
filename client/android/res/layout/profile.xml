@@ -14,6 +14,7 @@
         android:id="@+id/cluelist"
         android:name="com.spotme.ProfileFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />    
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="20dp"/>    
 
 </LinearLayout>
