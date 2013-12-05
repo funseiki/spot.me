@@ -1,22 +1,22 @@
 # /
 /ER_Diagram
+/.DS_Store
+/.env
+
+# /client/
+/client/.DS_Store
 
 # /client/android/
-/client/android/bin/
 /client/android/.DS_Store
-/client/.DS_Store
-/.DS_Store
-/config/
-/node_modules/
 /client/android/.metadata/
 /client/android/.settings/
 /client/android/.classpath
+/client/android/bin/
 
 # /server/
 
 #/server/node_modules
 /server/node_modules
-
 
 # /server/config
 /server/config/development.js
