@@ -9,7 +9,7 @@ var check = require('validator').check,
 function spotRoute(app, Spot) {
     app.post('/spot/create', function(req, res) {
         // TODO: Change this
-        var user = {id: 12};
+        var user = {id: 17};
 
         var imagePath = req.files.file.path,
             imageName = req.files.file.originalFilename;

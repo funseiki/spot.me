@@ -50,9 +50,10 @@ var spot = {
                   // Always either do something with `res` or at least call `res.resume()`.
                     if(res) res.resume();
                     callback(err, res);
-                }).on('error', function(e){ console.log("Error: " + e.message); });
+                }).on('error', function(e){ console.log("makeImage: onError", e); });
             }
         ], function(err, res){
+            console.log("makeImage: Err", err);
             main_callback(err, "https://s3.amazonaws.com/" +config.aws.bucket + locals.url);
         });
     },
@@ -106,6 +107,8 @@ var spot = {
                 locals.connection.query(QueryStrings.Clue.CREATE, new_clue, callback);
             }
         ], function(err, result) {
+            console.log("SpotCreate:: Err", err);
+            console.log("SpotCreate:: Res", result);
             if(locals.connection) {
                 db.EndTransaction(err, result, locals.connection, main_callback);
             }
