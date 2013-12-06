@@ -27,7 +27,7 @@ var user = {
                     // Set error to true so we skip to the bottom
                     cb(true, false, message);
                 }
-                else if(rows[0].EmailConfirmed < 1) {
+                else if(rows[0].emailConfirmed < 1) {
                     var message = new Message(errors.NOT_CONFIRMED);
                     cb(true, false, message);
                 }
