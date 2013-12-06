@@ -1,7 +1,9 @@
 package com.spotme;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -10,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class Register extends Activity {
 	@Override
@@ -35,18 +36,19 @@ public class Register extends Activity {
 				String cp = confirmPwd.getText().toString();
 				String un = username.getText().toString();
 				if (p.equals(cp)) {
-					Message m = new Message(ServerConnection.POST_TAG,
-							ServerConnection.serverURL + "user/register/email",
-							3);
-					List<NameValuePair> pairs = m.getNameValuePairs();
+					List<NameValuePair> pairs = new ArrayList<NameValuePair>(3);
 					pairs.add(new BasicNameValuePair("email", e));
 					pairs.add(new BasicNameValuePair("password", p));
 					pairs.add(new BasicNameValuePair("name", un));
-					String str = Utils.sendRequest(m);
-					Toast.makeText(getApplicationContext(), (CharSequence) str,
-							Toast.LENGTH_SHORT).show();
+					HttpEntity entity = Utils.convertToEntity(pairs);
+					Message m = new Message(ServerConnection.POST_TAG,
+							ServerConnection.serverURL + "user/register/email",
+							entity);
+
+					Utils.executeRequest(m);
+					
 				}
-				
+
 			}
 		});
 	}

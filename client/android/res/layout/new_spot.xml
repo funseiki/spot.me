@@ -61,8 +61,8 @@
         android:hint="@string/spotHint"/>
 
     
-    <Gallery
-        android:id="@+id/gallery1"
+    <ImageView
+        android:id="@+id/picPreview"
         android:layout_width="match_parent"
         android:layout_height="100dp" 
         android:layout_marginTop="@dimen/normal_margin_top"/>

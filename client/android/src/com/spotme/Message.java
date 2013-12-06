@@ -1,31 +1,17 @@
 package com.spotme;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
+import org.apache.http.HttpEntity;
 
 public class Message {
 
 	private String type;
 	private String url;
-	private List<NameValuePair> nameValuePairs;
-	private int numOfEntry;
+	private HttpEntity entity;
 
-	/**
-	 * Message constructor
-	 * 
-	 * @param type
-	 *            ServerConnection.GET_TAG or ServerConnection.POST_TAG
-	 * @param url
-	 * @param num
-	 *            number of name value pair in the request
-	 */
-	public Message(String type, String url, int num) {
-		setNumOfEntry(num);
+	public Message(String type, String url, HttpEntity entity) {
 		setType(type);
 		setUrl(url);
-		setNameValuePairs(new ArrayList<NameValuePair>(num));
+		setEntity(entity);
 	}
 
 	public String getType() {
@@ -36,14 +22,6 @@ public class Message {
 		this.type = type;
 	}
 
-	public int getNumOfEntry() {
-		return numOfEntry;
-	}
-
-	public void setNumOfEntry(int numOfEntry) {
-		this.numOfEntry = numOfEntry;
-	}
-
 	public String getUrl() {
 		return url;
 	}
@@ -52,11 +30,11 @@ public class Message {
 		this.url = url;
 	}
 
-	public List<NameValuePair> getNameValuePairs() {
-		return nameValuePairs;
+	public HttpEntity getEntity() {
+		return entity;
 	}
 
-	public void setNameValuePairs(List<NameValuePair> nameValuePairs) {
-		this.nameValuePairs = nameValuePairs;
+	public void setEntity(HttpEntity entity) {
+		this.entity = entity;
 	}
 }

@@ -3,14 +3,11 @@ package com.spotme;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -28,6 +25,8 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 	// private final static String serverURL = "http://127.0.0.1:8080/";
 	public final static String serverURL = "http://10.0.2.2:8080/";
 
+	// public final static String serverURL = "https://spot-me.herokuapp.com";
+
 	private HttpClient hClient;
 	private HttpPost hPost;
 	private HttpGet hGet;
@@ -40,22 +39,14 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 		hRepsonse = null;
 	}
 
-	private void postData(List<NameValuePair> nameValuePairs, String url) {
+	private void postData(HttpEntity entity, String url) {
 		hPost = new HttpPost(url);
-		try {
-			hPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		} catch (UnsupportedEncodingException e) {
-			Log.i(POST_TAG, "error encoding");
-			e.printStackTrace();
-		}
+		hPost.setEntity(entity);
 		try {
 			hRepsonse = hClient.execute(hPost);
 		} catch (ClientProtocolException e) {
-			Log.i(POST_TAG, "error protocol");
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.i(POST_TAG, "error I/O");
-			Log.i(POST_TAG, url);
 			e.printStackTrace();
 		}
 	}
@@ -112,7 +103,7 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 			getData(m.getUrl());
 		}
 		if (m.getType().equals(POST_TAG)) {
-			postData(m.getNameValuePairs(), m.getUrl());
+			postData(m.getEntity(), m.getUrl());
 		}
 		return retrieveJsonObj();
 	}

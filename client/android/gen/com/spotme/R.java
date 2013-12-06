@@ -77,43 +77,44 @@ public final class R {
         public static final int verified=0x7f020019;
     }
     public static final class id {
-        public static final int action_settings=0x7f09002f;
+        public static final int action_settings=0x7f090030;
         public static final int addSpot=0x7f09000e;
         public static final int back=0x7f090016;
         public static final int btn_login=0x7f090002;
         public static final int btn_signup=0x7f090004;
         public static final int camera=0x7f090010;
         public static final int cancel=0x7f09001a;
-        public static final int clue=0x7f090023;
+        public static final int clue=0x7f090024;
         public static final int cluelist=0x7f09000b;
-        public static final int confirmPassword=0x7f090022;
+        public static final int confirmPassword=0x7f090023;
         public static final int control=0x7f090005;
-        public static final int editText1=0x7f090028;
+        public static final int editText1=0x7f090029;
         public static final int email=0x7f090000;
-        public static final int faileMsgEnd=0x7f09002e;
+        public static final int faileMsgEnd=0x7f09002f;
         public static final int gallery=0x7f090011;
-        public static final int gallery1=0x7f090014;
+        public static final int gallery1=0x7f090022;
         public static final int givenUp=0x7f09001f;
         public static final int givenUp_num=0x7f090020;
         public static final int hint=0x7f090012;
         public static final int imageView1=0x7f09000c;
-        public static final int imageView2=0x7f090029;
-        public static final int img=0x7f090024;
-        public static final int invalid=0x7f09002b;
+        public static final int imageView2=0x7f09002a;
+        public static final int img=0x7f090025;
+        public static final int invalid=0x7f09002c;
         public static final int leaderboard=0x7f09000f;
-        public static final int listView1=0x7f09002a;
+        public static final int listView1=0x7f09002b;
         public static final int locationName=0x7f090018;
         public static final int logout=0x7f09001b;
-        public static final int miles=0x7f09002c;
-        public static final int milesStr=0x7f09002d;
+        public static final int miles=0x7f09002d;
+        public static final int milesStr=0x7f09002e;
         public static final int orText=0x7f090003;
         public static final int password=0x7f090001;
+        public static final int picPreview=0x7f090014;
         public static final int profile=0x7f09000d;
         public static final int recentfound=0x7f090021;
         public static final int send=0x7f090015;
         public static final int spot=0x7f090013;
-        public static final int spotId=0x7f090025;
-        public static final int spotName=0x7f090026;
+        public static final int spotId=0x7f090026;
+        public static final int spotName=0x7f090027;
         public static final int textView1=0x7f090006;
         public static final int textView2=0x7f090007;
         public static final int textView3=0x7f090008;
@@ -123,7 +124,7 @@ public final class R {
         public static final int unlockConfirmStr=0x7f090017;
         public static final int unlock_num=0x7f09001e;
         public static final int username=0x7f09001c;
-        public static final int verifiedMsg=0x7f090027;
+        public static final int verifiedMsg=0x7f090028;
         public static final int verify=0x7f090019;
     }
     public static final class layout {

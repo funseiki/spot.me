@@ -1,9 +1,12 @@
 package com.spotme;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -19,9 +22,9 @@ public class Login extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.profile);
-		//loginButtonSetup();
-		//signupButtonSetup();
+		setContentView(R.layout.login);
+		loginButtonSetup();
+		signupButtonSetup();
 	}
 
 	public void signupButtonSetup() {
@@ -45,21 +48,34 @@ public class Login extends Activity {
 				EditText email = (EditText) findViewById(R.id.email);
 				EditText pwd = (EditText) findViewById(R.id.password);
 
-				Message m = new Message(ServerConnection.POST_TAG,
-						ServerConnection.serverURL + "login/", 2);
-				List<NameValuePair> pairs = m.getNameValuePairs();
+				// gather form data
+				List<NameValuePair> pairs = new ArrayList<NameValuePair>(2);
 				pairs.add(new BasicNameValuePair("email", email.getText()
 						.toString()));
 				pairs.add(new BasicNameValuePair("password", pwd.getText()
 						.toString()));
 
-				String str = Utils.sendRequest(m);
-				Toast.makeText(getApplicationContext(), (CharSequence) str,
-						Toast.LENGTH_SHORT).show();
-				if (str.equals("true")) {
-					Intent main = new Intent(getApplicationContext(),
-							Main.class);
-					startActivity(main);
+				// compose entity
+				HttpEntity entity = Utils.convertToEntity(pairs);
+
+				// construct message
+				Message m = new Message(ServerConnection.POST_TAG,
+						ServerConnection.serverURL + "login/", entity);
+
+				// send request
+				String str;
+				try {
+					str = Utils.executeRequest(m).getString("login_success");
+					Toast.makeText(getApplicationContext(), (CharSequence) str,
+							Toast.LENGTH_SHORT).show();
+
+					if (str.equals("true")) {
+						Intent main = new Intent(getApplicationContext(),
+								Main.class);
+						startActivity(main);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
 			}
 		});

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jicongw/spot.me/client/android/libs/httpmime-4.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jicongw/spot.me/client/android/libs/apache-mime4j-0.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/jicongw/spot.me/client/android/libs/httpcore-4.3.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
