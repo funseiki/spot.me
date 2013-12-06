@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/new_spot_header_bg"
-    tools:ignore="ContentDescription,ButtonStyle" >
+    android:orientation="vertical"
+    tools:ignore="ContentDescription,ButtonStyle,UselessParent" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
