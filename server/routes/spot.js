@@ -48,6 +48,11 @@ function spotRoute(app, Spot) {
         // longitude
         // spotid
 
+       res.json({
+           hello: 'world',
+           foo: 'bar',
+           jicong: 'wang'
+       });
 
        // Returns: {success: true/false}
         //  {success: true, }
