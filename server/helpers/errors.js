@@ -10,7 +10,8 @@ var User = {
 };
 
 var Spot = {
-
+    NO_ID: "No spot with that id exists",
+    INVALID_SPOT: "This is not the spot"
 };
 
 var Database = {
