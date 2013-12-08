@@ -48,11 +48,23 @@ function spotRoute(app, Spot) {
         // longitude
         // spotid
 
-       res.json({
-           hello: 'world',
-           foo: 'bar',
-           jicong: 'wang'
-       });
+        var userid = req.user.id;
+        var spotInfo = {
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            spotid: req.body.spotid
+        };
+
+        Spot.verifySpot(userid, spotInfo, function(err, result) {
+            if(err) {
+               console.log("Routes::/spot/verify::Error", err);
+               res.statusCode = 500;
+               res.json({success: false, message: "Error"});
+            }
+            else {
+                res.json(result);
+            }
+        });
 
        // Returns: {success: true/false}
         //  {success: true, }
