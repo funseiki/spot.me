@@ -58,6 +58,38 @@ var Utils = {
         }, function(err) {
             callback(newCollection);
         });
+    },
+    cleanAndPrune: function(requiredKeys, inputCollection, callback) {
+        var locals = {
+            self : this
+        };
+        async.waterfall([
+            // First make sure nothing's null/undefined
+            function(callback) {
+                locals.self.inputsMissing(requiredKeys, inputCollection, function(missingInputs){
+                    if(missingInputs.length > 0) {
+                        var message = new Message(errors.General.INPUTS_MISSING);
+                        message.missingInputs = missingInputs;
+                        callback(true, message);
+                    }
+                    else {
+                        callback(null);
+                    }
+                });
+            },
+            function(callback) {
+                // Now sanitize the inputs
+                locals.self.cleanInputs(inputCollection, callback);
+            },
+            function(clean_collection, callback) {
+                locals.clean_collection = clean_collection;
+                locals.self.pruneSome(requiredKeys, locals.clean_collection, function(prunedCollection){
+                    callback(null, prunedCollection);
+                });
+            }
+        ], function(err, result) {
+            callback(err, result);
+        });
     }
 }
 
