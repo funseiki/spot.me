@@ -14,6 +14,7 @@ var geoUtils = {
         // Radius in km
         var radius = 6373;
 
+        toRad = this.toRad;
         // Get pts
         var pt1 = {
                 latitude: toRad(pt1Deg.latitude),
