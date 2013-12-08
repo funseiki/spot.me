@@ -20,6 +20,13 @@ var database = {
     }),
     EndConnection: function(err, results, connection, callback) {
         if(connection) connection.release();
+        if(Error.prototype.isPrototypeOf(err)) {
+            console.log("Error: ", err); // This is an exception probably, and we should log it
+        }
+        else {
+            // This is a client error, and the message should be in 'results'
+            err = null;
+        }
         callback(err, results);
     },
     GetConnection: function(callback) {
