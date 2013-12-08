@@ -1,6 +1,6 @@
 var db = require('./database'),
     utils = require('./utils'),
-    errors = require('./errors').User,
+    errors = require('./errors'),
     async = require('async'),
     bcrypt = require('bcrypt'),
     sanitizer = require('sanitizer'),
@@ -18,10 +18,10 @@ var spot = {
         var locals = {};
         async.waterfall([
             function(callback) {
-                utils.inputsMissing(['imageName', 'imagePath'], imageData, function(result){
+                utils.inputsMissing(['imageName', 'imagePath'], imageData, function(missing){
                     var err = null;
-                    if(result > 0) {
-                        callback(result);
+                    if(missing > 0) {
+                        callback(true, new Message(errors.General.INPUTS_MISSING, missing));
                     }
                     else {
                         callback(null);
@@ -43,7 +43,7 @@ var spot = {
                 s3.putFile(locals.url, locals.clean_image.imagePath, 'public-read' , {}, callback);
             }
         ], function(err, res){
-            console.log("makeImage: Err", err);
+            if(err) console.log("makeImage::Err", err);
             main_callback(err, "https://s3.amazonaws.com/" +config.aws.bucket + locals.url);
         });
     },
@@ -60,7 +60,7 @@ var spot = {
                 // Check for missing inputs (including for 'clue')
                 utils.inputsMissing(required_inputs, clean_inputs, function(missing){
                     if(missing.length > 0) {
-                        callback(true);
+                        callback(true, new Message(errors.General.INPUTS_MISSING, missing));
                     }
                     else {
                         callback();
@@ -97,8 +97,10 @@ var spot = {
                 locals.connection.query(QueryStrings.Clue.CREATE, new_clue, callback);
             }
         ], function(err, result) {
-            console.log("SpotCreate:: Err", err);
-            console.log("SpotCreate:: Res", result);
+            if(err) {
+                console.log("SpotCreate:: Err", err);
+                console.log("SpotCreate:: Res", result);
+            }
             if(locals.connection) {
                 db.EndTransaction(err, result, locals.connection, main_callback);
             }
