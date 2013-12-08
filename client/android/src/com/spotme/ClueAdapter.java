@@ -3,7 +3,6 @@ package com.spotme;
 import java.io.IOException;
 import java.net.URL;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -20,8 +19,6 @@ import android.widget.TextView;
 
 public class ClueAdapter extends ArrayAdapter<JSONObject> {
 
-	private static final String TAG = "ClueAdapter";
-
 	private final Context context;
 	private final JSONObject[] objs;
 	private final int resource;
@@ -33,16 +30,6 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 		this.resource = resource;
 	}
 
-	private String getDataFromJsonObj(JSONObject obj, String name) {
-		String result = null;
-		try {
-			result = obj.getString(name);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			Log.i(TAG, name + " does not exist in JSON object.");
-		}
-		return result;
-	}
 
 	private static class ViewHolder {
 		private ImageView imageView;
@@ -64,9 +51,9 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 
 		JSONObject obj = objs[position];
 
-		String imgSrc = getDataFromJsonObj(obj, "imgSrc");
-		String clue = getDataFromJsonObj(obj, "clue");
-		String spotId = getDataFromJsonObj(obj, "spotId");
+		String imgSrc = Utils.getDataFromJsonObj(obj, "imgSrc");
+		String clue = Utils.getDataFromJsonObj(obj, "clue");
+		String spotId = Utils.getDataFromJsonObj(obj, "spotId");
 
 		ViewHolder viewHolder = null;
 		if (convertView == null) {

@@ -8,10 +8,13 @@ import java.util.concurrent.ExecutionException;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class Utils {
-	
+
 	public final static String POST_TAG = "POST";
 	public final static String GET_TAG = "GET";
 	public final static String RESPONSE_TAG = "RESPONSE";
@@ -19,6 +22,7 @@ public class Utils {
 	public final static String serverURL = "http://10.0.2.2:8080/";
 	// public final static String serverURL = "https://spot-me.herokuapp.com";
 	public final static String mainClueListGetRequest = "";
+	public static final String CLUE_ADAPTER_TAG = "ClueAdapter";
 
 	public static final String GPS_LOCATION_TAG = "GPS_TRACKER";
 	public static final long GPS_UPDATE_PERIOD = 5 * 60 * 1000;
@@ -26,6 +30,17 @@ public class Utils {
 
 	public static final double LATITUDE_DEFAULT = 40.1137;
 	public static final double LONGITUDE_DEFAULT = -88.224;
+
+	public static String getDataFromJsonObj(JSONObject obj, String name) {
+		String result = null;
+		try {
+			result = obj.getString(name);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.i(CLUE_ADAPTER_TAG, name + " does not exist in JSON object.");
+		}
+		return result;
+	}
 
 	/**
 	 * send the request and get back the result string

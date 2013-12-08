@@ -108,7 +108,7 @@ public class NewSpot extends Activity {
 
 		MultipartEntityBuilder en = MultipartEntityBuilder.create();
 		en.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-		en.addTextBody("user", session.getUserId());
+		en.addTextBody("userid", session.getUserId());
 		en.addTextBody("clue", hintText);
 		en.addTextBody("latitude", Double.toString(Utils.LATITUDE_DEFAULT));
 		en.addTextBody("longitude", Double.toString(Utils.LONGITUDE_DEFAULT));

@@ -12,7 +12,6 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_invalid_confirm_password">Passwords do not match</string>
     <string name="error_field_required">This field is required</string>
- 
     <string name="signIn">Sign In</string>
     <string name="submit">Submit</string>
     <string name="orText">Or</string>
@@ -21,46 +20,41 @@
     <string name="passwordHint">Password</string>
     <string name="confirmPasswordHint">Confirm Password</string>
     <string name="register">Create account</string>
-    
     <string name="topTenMsg">Top Ten in </string>
-    <string name="unlockedMsg">( You\'ve unlocked </string>
+    <string name="unlockedMsg"> (You\'ve unlocked </string>
     <string name="endUnlockedMsg"> /10)</string>
     <string name="newSpotTitle">Create a spot</string>
     <string name="clueHint">Enter your clue/description here</string>
-    
     <string name="unlockConfirm">Are you sure to unlock</string>
     <string name="confirm">Verify!</string>
     <string name="cancel">Cancel</string>
-    
-   	<string name="failedMsg">You\'re </string>
-   	<string name="milesStr">miles away</string>
-   	<string name="failedMsgEnd">from the spot!</string>
+    <string name="failedMsg">You\'re </string>
+    <string name="milesStr">miles away</string>
+    <string name="failedMsgEnd">from the spot!</string>
     <string name="back">Back</string>
-    
     <string name="hintHint">Hint</string>
     <string name="spotHint">Spot</string>
-    
     <string name="imgDescription">Image</string>
-    
-    <string name="verifiedMsg">Verified!</string>    
+    <string name="verifiedMsg">Verified!</string>
     <string name="send">Send</string>
     <string name="unSpot">Unlocked Spots: </string>
     <string name="givenUp">Given Up: </string>
     <string name="logOut">Log out</string>
-    <string name="recentFound">Recent Found Spots: </string>    
-    
+    <string name="recentFound">Recent Found Spots: </string>
+
     <color name="menuBg">#9dd1eb</color>
     <color name="highightedButton">#487890</color>
     <color name="headerBg">#9dd1eb</color>
-	<color name="buttonBorder">#777777</color>  
-	<color name="buttonBg">#487890</color>
-	<color name="buttonText">#EEEEEE</color>
-	<color name="hlText">#eb864a</color>
-	<color name="white">#FFFFFF</color>
-	<color name="greyText">#777777</color>  
+    <color name="buttonBorder">#777777</color>
+    <color name="buttonBg">#487890</color>
+    <color name="buttonText">#EEEEEE</color>
+    <color name="hlText">#eb864a</color>
+    <color name="white">#FFFFFF</color>
+    <color name="greyText">#777777</color>
     <color name="hlbtn">#487890</color>
     <color name="blackText">#222222</color>
     <color name="secTextColor">#cccccc</color>
     <color name="popupBg">#e0e0e0</color>
     <color name="logOutText">#5995b3</color>
+
 </resources>
