@@ -39,6 +39,33 @@ function spotRoute(app, Spot) {
             });
         });
     });
+
+    app.post('/spot/verify', allowRequest, function(req, res){
+        // Expects:
+        // user {id: <>}
+        // latitude
+        // longitude
+        // spotid
+
+
+       // Returns: {success: true/false}
+        //  {success: true, }
+    });
+
+    app.post('/spot/list/current', allowRequest, function(req, res) {
+        // Expects:
+        // userid
+    });
+
+    app.post('/spot/comments/get', allowRequest, function(req, res) {
+        // Checks if verified..
+
+        // returns comments: [{userid: <>, imageurl: <>, message: <>, story: <null>}]
+    });
+
+    app.post('/spot/comments/create', allowRequest, function(req, res){
+
+    });
 }
 
 module.exports = spotRoute;
