@@ -1,6 +1,7 @@
-function ClientMessage(message) {
+function ClientMessage(message, info) {
     return {
-        message: message
+        message: message,
+        info: info
     };
 }
 
