@@ -81,6 +81,9 @@ var spot = {
                     callback(true, retMessage);
                     return;
                 }
+                else {
+                    callback();
+                }
             },
             function(callback) {
                 var post = {spotid: locals.clean_inputs.spotid, userid: locals.clean_inputs.userid};
