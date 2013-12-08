@@ -39,6 +39,10 @@ function routes(app, passport) {
     app.get('/', function(req, res){
         res.render("imageform");
     });
+
+    app.get('/testspot', function(req, res){
+        res.render("spotverify");
+    })
 }
 
 module.exports = routes;
