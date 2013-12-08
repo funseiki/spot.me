@@ -75,7 +75,7 @@ var spot = {
                 if(distance > 10) {
                     retMessage = {
                         success: false,
-                        message: errors.INVALID_SPOT,
+                        message: errors.Spot.INVALID_SPOT,
                         distance: distance
                     };
                     callback(true, retMessage);
@@ -88,6 +88,19 @@ var spot = {
             function(callback) {
                 var post = {spotid: locals.clean_inputs.spotid, userid: locals.clean_inputs.userid};
                 locals.connection.query(QueryStrings.User.SPOT_VERIFIED, post, callback);
+            },
+            function(rows, fields, callback) {
+                if(!rows || !rows[0]) {
+                    callback(true, {
+                        success: false,
+                        message: errors.User.UNABLE_TO_VERIFY
+                    });
+                    return;
+                }
+                callback(null, {
+                    success: true,
+                    message: "You have successfully found the spot"
+                });
             }
         ], function(err, result) {
             db.EndTransaction(err, result, locals.connection, main_callback);

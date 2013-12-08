@@ -6,12 +6,14 @@ var User = {
     BAD_PASSWORD: "Incorrect password",
     ALREADY_CONFIRMED: "This user has already confirmed",
     INCORRECT_TOKEN: "Incorrect Token",
-    EXPIRED_TOKEN: "The token has expired"
+    EXPIRED_TOKEN: "The token has expired",
+    UNABLE_TO_VERIFY: "Unable to verify this spot. " +
+                    " You might have already found it"
 };
 
 var Spot = {
     NO_ID: "No spot with that id exists",
-    INVALID_SPOT: "This is not the spot"
+    INVALID_SPOT: "This is not the spot",
 };
 
 var Database = {
