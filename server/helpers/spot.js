@@ -87,19 +87,18 @@ var spot = {
             },
             function(callback) {
                 var post = {spotid: locals.clean_inputs.spotid, userid: locals.clean_inputs.userid};
-                locals.connection.query(QueryStrings.User.SPOT_VERIFIED, post, callback);
-            },
-            function(rows, fields, callback) {
-                if(!rows || !rows[0]) {
-                    callback(true, {
-                        success: false,
-                        message: errors.User.UNABLE_TO_VERIFY
+                locals.connection.query(QueryStrings.User.SPOT_VERIFIED, post, function(err, row, fields){
+                    if( err || row.affectedRows < 1 ) {
+                        callback(true, {
+                            success: false,
+                            message: errors.User.UNABLE_TO_VERIFY
+                        });
+                        return;
+                    }
+                    callback(null, {
+                        success: true,
+                        message: "You have successfully found the spot"
                     });
-                    return;
-                }
-                callback(null, {
-                    success: true,
-                    message: "You have successfully found the spot"
                 });
             }
         ], function(err, result) {
