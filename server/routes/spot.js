@@ -5,10 +5,10 @@
 var check = require('validator').check,
     config = require('../config'),
     async = require('async');
+    allowRequest = require('./checkUser'),
 
 function spotRoute(app, Spot) {
-    app.post('/spot/create', function(req, res) {
-        // TODO: Change this
+    app.post('/spot/create', allowRequest, function(req, res) {
         var user = req.user;
 
         var imagePath = req.files.file.path,
