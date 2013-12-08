@@ -11,7 +11,8 @@ var db = require('./database'),
     AWS = require('aws-sdk'),
     path = require('path'),
     s3 = require('aws2js').load('s3', config.aws.keys.accessKeyId, config.aws.keys.secretAccessKey);
-    s3.setBucket(config.aws.bucket);
+    s3.setBucket(config.aws.bucket),
+    geo = require('./geoUtils');
 
 var spot = {
     makeImage: function(imageData, s3Folder, main_callback) {
@@ -45,6 +46,51 @@ var spot = {
         ], function(err, res){
             if(err) console.log("makeImage::Err", err);
             main_callback(err, "https://s3.amazonaws.com/" +config.aws.bucket + locals.url);
+        });
+    },
+    verifySpot: function(userid, spotinfo, main_callback) {
+        var locals = {};
+        async.waterfall([
+            db.StartTransaction.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                var get = spotinfo;
+                get.userid = userid;
+                utils.cleanAndPrune(['userid','latitude', 'longitude', 'spotid'], get, callback);
+            },
+            function(clean_inputs, callback) {
+                locals.clean_inputs = clean_inputs;
+                locals.connection.query(QueryStrings.Spot.GET_LOCATION, {id: clean_inputs.spotid}, callback);
+            },
+            function(rows, fields, callback) {
+                if(!rows || !rows[0]) {
+                    callback(true, new Message(errors.NO_ID));
+                    return;
+                }
+                var spotPoint = geo.Point(rows[0].latitude, rows[0].longitude);
+                var myPoint = geo.Point(locals.clean_inputs.latitude, locals.clean_inputs.longitude);
+                // Get distance between points in meters
+                var distance = geo.Distance(spotPoint, myPoint) * 1000;
+                console.log(distance);
+                var retMessage = null;
+                if(distance > 10) {
+                    retMessage = {
+                        success: false,
+                        message: errors.INVALID_SPOT,
+                        distance: distance
+                    };
+                    console.log("Hello");
+                    callback(true, retMessage);
+                    return;
+                }
+            },
+            function(callback) {
+                var post = {spotid: locals.clean_inputs.spotid, userid: locals.clean_inputs.userid};
+                locals.connection.query(QueryStrings.User.SPOT_VERIFIED, post, callback);
+            }
+        ], function(err, result) {
+            console.log(err, result);
+            db.EndTransaction(err, result, locals.connection, main_callback);
         });
     },
     create: function(user, spot, main_callback) {
