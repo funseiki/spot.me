@@ -89,7 +89,7 @@ var database = {
             },
         ], function(err, result) {
             // Return the connection to the pool
-            this.EndConnection(err, result, connection, callback);
+            this.EndConnection(err, results, connection, callback);
         }.bind(this));
     },
     Query: function(queryString, inputs, callback) {
