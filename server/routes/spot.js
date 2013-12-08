@@ -9,8 +9,9 @@ var check = require('validator').check,
     fs = require('fs');
 
 function spotRoute(app, Spot) {
-    app.post('/spot/create', allowRequest, function(req, res) {
+    app.post('/spot/create', function(req, res) {
         var user = req.user;
+        console.log("Route::/spot/create::req", req.body);
 
         var imagePath = req.files.file.path,
             imageName = req.files.file.originalFilename;

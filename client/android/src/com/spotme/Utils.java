@@ -1,6 +1,7 @@
 package com.spotme;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -26,7 +27,7 @@ public class Utils {
 	 * @return response in json format
 	 */
 	public static JSONObject executeRequest(Message msg) {
-		
+
 		JSONObject result = null;
 		try {
 			result = new ServerConnection().execute(msg).get();
@@ -54,4 +55,10 @@ public class Utils {
 		return entity;
 
 	}
+
+	public static double truncate(double d) {
+		DecimalFormat df = new DecimalFormat("####.####");
+		return Double.parseDouble(df.format(d));
+	}
+
 }

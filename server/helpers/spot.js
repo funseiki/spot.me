@@ -86,6 +86,8 @@ var spot = {
                     latitude: locals.clean_spot.latitude,
                     longitude: locals.clean_spot.longitude
                 };
+                console.log("Spot::Create::new_spot", new_spot);
+                console.log("Spot::Create::locals", locals);
                 locals.connection.query(QueryStrings.Spot.CREATE, new_spot, callback);
             },
             function(row, fields, callback) {

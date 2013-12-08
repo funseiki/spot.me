@@ -30,6 +30,10 @@ public class NewSpot extends Activity {
 	private Bitmap pic;
 	private GPSTracker gps;
 
+	private void shutdown() {
+		this.finish();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,6 +41,18 @@ public class NewSpot extends Activity {
 		gps = new GPSTracker(getApplicationContext());
 		setupCameraButton();
 		setupSubmitButton();
+		setupBackButton();
+	}
+
+	private void setupBackButton() {
+		Button back = (Button) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				shutdown();
+			}
+		});
 	}
 
 	private void setupSubmitButton() {
@@ -49,7 +65,6 @@ public class NewSpot extends Activity {
 				gatherInfoAndSendRequest();
 			}
 		});
-
 	}
 
 	public File convertBitmapToFile(Bitmap bm) {
@@ -90,10 +105,10 @@ public class NewSpot extends Activity {
 
 		MultipartEntityBuilder en = MultipartEntityBuilder.create();
 		en.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-		en.addTextBody("user", "{'userid':'1'}");
+		en.addTextBody("user", "{'userid':'18'}");
 		en.addTextBody("clue", hintText);
 		en.addTextBody("latitude", Double.toString(Utils.LATITUDE_DEFAULT));
-		en.addTextBody("longtitude", Double.toString(Utils.LONGITUDE_DEFAULT));
+		en.addTextBody("longitude", Double.toString(Utils.LONGITUDE_DEFAULT));
 
 		File imgFile = convertBitmapToFile(getPic());
 
@@ -106,6 +121,10 @@ public class NewSpot extends Activity {
 
 		Utils.executeRequest(m);
 		imgFile.delete();
+		Toast.makeText(getApplicationContext(), "Send succeeded",
+				Toast.LENGTH_LONG).show();
+		shutdown();
+
 	}
 
 	private void setupCameraButton() {
