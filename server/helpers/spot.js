@@ -71,7 +71,6 @@ var spot = {
                 var myPoint = geo.Point(locals.clean_inputs.latitude, locals.clean_inputs.longitude);
                 // Get distance between points in meters
                 var distance = geo.Distance(spotPoint, myPoint) * 1000;
-                console.log(distance);
                 var retMessage = null;
                 if(distance > 10) {
                     retMessage = {
@@ -79,7 +78,6 @@ var spot = {
                         message: errors.INVALID_SPOT,
                         distance: distance
                     };
-                    console.log("Hello");
                     callback(true, retMessage);
                     return;
                 }
@@ -89,7 +87,6 @@ var spot = {
                 locals.connection.query(QueryStrings.User.SPOT_VERIFIED, post, callback);
             }
         ], function(err, result) {
-            console.log(err, result);
             db.EndTransaction(err, result, locals.connection, main_callback);
         });
     },
@@ -132,8 +129,6 @@ var spot = {
                     latitude: locals.clean_spot.latitude,
                     longitude: locals.clean_spot.longitude
                 };
-                console.log("Spot::Create::new_spot", new_spot);
-                console.log("Spot::Create::locals", locals);
                 locals.connection.query(QueryStrings.Spot.CREATE, new_spot, callback);
             },
             function(row, fields, callback) {

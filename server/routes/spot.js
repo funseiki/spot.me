@@ -11,7 +11,6 @@ var check = require('validator').check,
 function spotRoute(app, Spot) {
     app.post('/spot/create', allowRequest, function(req, res) {
         var user = req.user;
-        console.log("Route::/spot/create::req", req.body);
 
         var imagePath = req.files.file.path,
             imageName = req.files.file.originalFilename;
@@ -43,7 +42,7 @@ function spotRoute(app, Spot) {
 
     app.post('/spot/verify', allowRequest, function(req, res){
         // Expects:
-        // user {id: <>}
+        // userid
         // latitude
         // longitude
         // spotid
