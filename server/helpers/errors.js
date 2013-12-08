@@ -17,10 +17,15 @@ var Database = {
     GENERIC: "Unable to access information at this time"
 };
 
+var General = {
+    MISSING_INPUTS: "Inputs missing"
+}
+
 var Errors = {
     User: User,
     Database: Database,
     Spot: Spot,
+    General: General,
     Log: function(message) {
         // Log more betterer
         console.log(message);
