@@ -4,8 +4,9 @@
  **************************************/
 var check = require('validator').check,
     config = require('../config'),
-    async = require('async');
+    async = require('async'),
     allowRequest = require('./checkUser'),
+    fs = require('fs');
 
 function spotRoute(app, Spot) {
     app.post('/spot/create', allowRequest, function(req, res) {
@@ -21,13 +22,21 @@ function spotRoute(app, Spot) {
             imageName: imageName,
             story: "Here's a story " // We're not using this yet
         };
+
         Spot.create(user, new_spot, function(err, resp){
-            if(err) {
-                res.send("Error uploading file :(");
-            }
-            else {
-                res.send("Success!");
-            }
+            // Delete the temp file
+            fs.unlink(imagePath, function(fileError){
+                if(fileError) {
+                    console.log("Error deleting file", fileError);
+                }
+                if(err) {
+                    console.log(err);
+                    res.json({success: false, message: "Error creating spot"});
+                }
+                else {
+                    res.send({success: true});
+                }
+            });
         });
     });
 }
