@@ -7,6 +7,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -59,17 +60,24 @@ public class Login extends Activity {
 				HttpEntity entity = Utils.convertToEntity(pairs);
 
 				// construct message
-				Message m = new Message(ServerConnection.POST_TAG,
-						ServerConnection.serverURL + "login/", entity);
+				Message m = new Message(Utils.POST_TAG, Utils.serverURL
+						+ "login/", entity);
 
 				// send request
 				String str;
 				try {
-					str = Utils.executeRequest(m).getString("login_success");
+					JSONObject response = Utils.executeRequest(m);
+
+					str = response.getString("login_success");
 					Toast.makeText(getApplicationContext(), (CharSequence) str,
 							Toast.LENGTH_SHORT).show();
 
-					if (str.equals("true")) {
+					if (response.getBoolean("login_success")) {
+						String userId = response.getString("userid");
+						// String token = response.getString("token");
+						SpotMeSession session = SpotMeSession.getSession();
+						session.setUserId(userId);
+						// session.setToken(token);
 						Intent main = new Intent(getApplicationContext(),
 								Main.class);
 						startActivity(main);

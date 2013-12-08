@@ -29,6 +29,7 @@ public class NewSpot extends Activity {
 
 	private Bitmap pic;
 	private GPSTracker gps;
+	private SpotMeSession session;
 
 	private void shutdown() {
 		this.finish();
@@ -42,6 +43,7 @@ public class NewSpot extends Activity {
 		setupCameraButton();
 		setupSubmitButton();
 		setupBackButton();
+		session = SpotMeSession.getSession();
 	}
 
 	private void setupBackButton() {
@@ -97,6 +99,7 @@ public class NewSpot extends Activity {
 	}
 
 	public void gatherInfoAndSendRequest() {
+
 		EditText hint = (EditText) findViewById(R.id.hint);
 		String hintText = hint.getText().toString();
 
@@ -105,7 +108,7 @@ public class NewSpot extends Activity {
 
 		MultipartEntityBuilder en = MultipartEntityBuilder.create();
 		en.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-		en.addTextBody("user", "{'userid':'18'}");
+		en.addTextBody("user", session.getUserId());
 		en.addTextBody("clue", hintText);
 		en.addTextBody("latitude", Double.toString(Utils.LATITUDE_DEFAULT));
 		en.addTextBody("longitude", Double.toString(Utils.LONGITUDE_DEFAULT));
@@ -116,8 +119,8 @@ public class NewSpot extends Activity {
 				"hello.png");
 
 		final HttpEntity entity = en.build();
-		Message m = new Message(ServerConnection.POST_TAG,
-				ServerConnection.serverURL + "spot/create", entity);
+		Message m = new Message(Utils.POST_TAG,
+				Utils.serverURL + "spot/create", entity);
 
 		Utils.executeRequest(m);
 		imgFile.delete();

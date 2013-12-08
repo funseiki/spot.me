@@ -41,8 +41,8 @@ public class Register extends Activity {
 					pairs.add(new BasicNameValuePair("password", p));
 					pairs.add(new BasicNameValuePair("name", un));
 					HttpEntity entity = Utils.convertToEntity(pairs);
-					Message m = new Message(ServerConnection.POST_TAG,
-							ServerConnection.serverURL + "user/register/email",
+					Message m = new Message(Utils.POST_TAG,
+							Utils.serverURL + "user/register/email",
 							entity);
 
 					Utils.executeRequest(m);

@@ -16,6 +16,8 @@ public class ClueListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		Message m = new Message(Utils.GET_TAG,
+				Utils.mainClueListGetRequest, null);
 		// some demo data
 		JSONObject[] objects = new JSONObject[2];
 

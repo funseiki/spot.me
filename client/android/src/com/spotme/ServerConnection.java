@@ -19,14 +19,6 @@ import android.util.Log;
 
 public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 
-	public final static String POST_TAG = "POST";
-	public final static String GET_TAG = "GET";
-
-	// private final static String serverURL = "http://127.0.0.1:8080/";
-	public final static String serverURL = "http://10.0.2.2:8080/";
-
-	// public final static String serverURL = "https://spot-me.herokuapp.com";
-
 	private HttpClient hClient;
 	private HttpPost hPost;
 	private HttpGet hGet;
@@ -56,10 +48,10 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 		try {
 			hRepsonse = hClient.execute(hGet);
 		} catch (ClientProtocolException e) {
-			Log.i(GET_TAG, "client protocol error");
+			Log.i(Utils.GET_TAG, "client protocol error");
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.i(GET_TAG, "I/O error happens in getData");
+			Log.i(Utils.GET_TAG, "I/O error happens in getData");
 			e.printStackTrace();
 		}
 	}
@@ -99,12 +91,15 @@ public class ServerConnection extends AsyncTask<Message, Void, JSONObject> {
 	@Override
 	protected JSONObject doInBackground(Message... params) {
 		Message m = params[0];
-		if (m.getType().equals(GET_TAG)) {
+		if (m.getType().equals(Utils.GET_TAG)) {
 			getData(m.getUrl());
 		}
-		if (m.getType().equals(POST_TAG)) {
+		if (m.getType().equals(Utils.POST_TAG)) {
 			postData(m.getEntity(), m.getUrl());
 		}
-		return retrieveJsonObj();
+
+		JSONObject obj = retrieveJsonObj();
+		Log.d(Utils.RESPONSE_TAG, obj.toString());
+		return obj;
 	}
 }

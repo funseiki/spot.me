@@ -11,6 +11,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.json.JSONObject;
 
 public class Utils {
+	
+	public final static String POST_TAG = "POST";
+	public final static String GET_TAG = "GET";
+	public final static String RESPONSE_TAG = "RESPONSE";
+	// private final static String serverURL = "http://127.0.0.1:8080/";
+	public final static String serverURL = "http://10.0.2.2:8080/";
+	// public final static String serverURL = "https://spot-me.herokuapp.com";
+	public final static String mainClueListGetRequest = "";
 
 	public static final String GPS_LOCATION_TAG = "GPS_TRACKER";
 	public static final long GPS_UPDATE_PERIOD = 5 * 60 * 1000;
@@ -24,10 +32,9 @@ public class Utils {
 	 * 
 	 * @param msg
 	 *            message
-	 * @return response in json format
+	 * @return response in json array format
 	 */
 	public static JSONObject executeRequest(Message msg) {
-
 		JSONObject result = null;
 		try {
 			result = new ServerConnection().execute(msg).get();
