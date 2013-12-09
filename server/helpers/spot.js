@@ -65,7 +65,7 @@ var spot = {
             },
             function(rows, fields, callback) {
                 if(!rows || !rows[0]) {
-                    callback(true, new Message(errors.NO_ID));
+                    callback(true, new Message(errors.Spot.NO_ID));
                     return;
                 }
                 var spotPoint = geo.Point(rows[0].latitude, rows[0].longitude);
