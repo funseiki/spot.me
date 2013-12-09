@@ -44,35 +44,50 @@ function userRoute(app, User) {
         errors = errors.concat(check(latitude).notNull().notEmpty().getErrors());
         errors = errors.concat(check(longitude).notNull().notEmpty().getErrors());
         if(errors.length > 0) {
-            res.send("A field has been left blank");
+            res.send(
+                success: true,
+                message: "A field has been left blank"
+            );
             return;
         }
 
         // Make sure the email string is properly formed
         if(check(email).isEmail().hasError()) {
             res.statusCode = 403;
-            res.json({message: "Invalid Email"});
+            res.json({
+                success: true,
+                message: "Invalid Email"
+            });
             return;
         }
         if(check(latitude).isFloat().hasError() || check(latitude).isFloat().hasError()) {
             res.statusCode = 403;
-            res.json({message: "Invalid Location"});
+            res.json({
+                success: false,
+                message: "Invalid Location"
+            });
             return;
         }
 
-        var locals = {response: "There was a database issue :/"};
+        var locals = {
+            success: false,
+            message: "There was a database issue :/"
+        };
         async.waterfall([
             // Make sure the email isn't taken already
             async.apply(User.CheckEmailTaken.bind(User), email),
             function(isTaken, callback) {
-                locals.response = "That email already exists!";
+                locals.= "That email already exists!";
                 callback(null, name, email, password, latitude, longitude);
             },
             // If it isn't, let's register
             User.RegisterEmail.bind(User),
             function(new_user, callback) {
                 // TODO: Send a registration email here
-                locals.response = {message: "Success, check your email in a bit to confirm your registration!"};
+                locals.response = {
+                    success: true,
+                    message: "Success, check your email in a bit to confirm your registration!"
+                };
                 User.SendRegistrationEmail(new_user, callback);
             }
         ], function(err){
