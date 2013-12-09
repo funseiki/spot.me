@@ -24,6 +24,17 @@ public class MainControlFragment extends Fragment {
 				startActivity(i);
 			}
 		});
+
+		Button profile = (Button) result.findViewById(R.id.profile);
+		profile.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), Profile.class);
+				startActivity(i);
+			}
+		});
+
 		return result;
 	}
 }

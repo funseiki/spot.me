@@ -30,7 +30,6 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 		this.resource = resource;
 	}
 
-
 	private static class ViewHolder {
 		private ImageView imageView;
 		private Bitmap bitmap;
@@ -57,7 +56,7 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.row_layout, null);
+			convertView = inflater.inflate(getResource(), null);
 			ImageView imgView = (ImageView) convertView.findViewById(R.id.img);
 
 			viewHolder = new ViewHolder(imgView, null, imgSrc);
@@ -109,6 +108,8 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 
 		@Override
 		protected void onPostExecute(ViewHolder result) {
+			Log.d(Utils.CLUE_ADAPTER_TAG, "Downloaded reach here "
+					+ result.imageURL);
 			if (result.bitmap == null) {
 				result.imageView.setImageResource(R.drawable.ic_launcher);
 			} else {

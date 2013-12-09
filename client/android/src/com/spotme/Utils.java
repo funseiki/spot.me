@@ -31,6 +31,13 @@ public class Utils {
 	public static final double LATITUDE_DEFAULT = 40.1137;
 	public static final double LONGITUDE_DEFAULT = -88.224;
 
+	/**
+	 * get data from json object
+	 * 
+	 * @param obj
+	 * @param name
+	 * @return
+	 */
 	public static String getDataFromJsonObj(JSONObject obj, String name) {
 		String result = null;
 		try {
@@ -83,4 +90,81 @@ public class Utils {
 		return Double.parseDouble(df.format(d));
 	}
 
+	public static JSONObject getIncorrectSampleData() {
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("success", "false");
+			obj.put("distance", "1500");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+
+	public static JSONObject[] getCommentSampleData() {
+		JSONObject[] objects = new JSONObject[6];
+		JSONObject one = new JSONObject();
+		try {
+			one.put("nickname", "tommy");
+			one.put("time", "0000-00-00");
+			one.put("imgSrc",
+					"http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png");
+			one.put("comment", "hey, what's up");
+			one.put("spotId", "1");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		JSONObject two = new JSONObject();
+		try {
+			two.put("nickname", "olie");
+			two.put("time", "1111-00-00");
+			two.put("imgSrc",
+					"http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png");
+			two.put("comment", "not much, just a shitty clue");
+			two.put("spotId", "1");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		objects[0] = one;
+		objects[1] = two;
+		objects[2] = two;
+		objects[3] = one;
+		objects[4] = two;
+		objects[5] = one;
+
+		return objects;
+	}
+
+	public static JSONObject[] getClueListSampleData() {
+		JSONObject[] objects = new JSONObject[6];
+
+		JSONObject one = new JSONObject();
+		try {
+			one.put("clue", "hello world");
+			one.put("imgSrc",
+					"http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png");
+			one.put("imgSrc",
+					"https://s3.amazonaws.com/spotme/spots/1fd9bc7606f730b506b29ac4e1a609fc7894c3a7a1e6f893928734fd4b12cf31951fd8ac913cfedbcc66f926c40e53ab.png");
+			one.put("spotId", "1");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		JSONObject two = new JSONObject();
+		try {
+			two.put("clue", "yolo");
+			two.put("imgSrc",
+					"http://icons.iconarchive.com/icons/deleket/button/256/Button-Next-icon.png");
+			two.put("spotId", "123");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		objects[0] = one;
+		objects[1] = two;
+		objects[2] = two;
+		objects[3] = one;
+		objects[4] = two;
+		objects[5] = one;
+
+		return objects;
+	}
 }

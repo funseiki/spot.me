@@ -29,7 +29,7 @@
     <string name="confirm">Verify!</string>
     <string name="cancel">Cancel</string>
     <string name="failedMsg">You\'re </string>
-    <string name="milesStr">miles away</string>
+    <string name="milesStr">meters away</string>
     <string name="failedMsgEnd">from the spot!</string>
     <string name="back">Back</string>
     <string name="hintHint">Hint</string>

@@ -35,18 +35,26 @@ public class Register extends Activity {
 				String p = pwd.getText().toString();
 				String cp = confirmPwd.getText().toString();
 				String un = username.getText().toString();
+
+				GPSTracker gps = new GPSTracker(getApplicationContext());
+				gps.startUsingGPS();
+				double longitude = gps.getLongitude();
+				double latitude = gps.getLatitude();
+				gps.stopUsingGPS();
+
 				if (p.equals(cp)) {
-					List<NameValuePair> pairs = new ArrayList<NameValuePair>(3);
+					List<NameValuePair> pairs = new ArrayList<NameValuePair>(5);
 					pairs.add(new BasicNameValuePair("email", e));
 					pairs.add(new BasicNameValuePair("password", p));
 					pairs.add(new BasicNameValuePair("name", un));
+					pairs.add(new BasicNameValuePair("longitude", String.valueOf(longitude)));
+					pairs.add(new BasicNameValuePair("latitude", String.valueOf(latitude)));
 					HttpEntity entity = Utils.convertToEntity(pairs);
-					Message m = new Message(Utils.POST_TAG,
-							Utils.serverURL + "user/register/email",
-							entity);
+					Message m = new Message(Utils.POST_TAG, Utils.serverURL
+							+ "user/register/email", entity);
 
 					Utils.executeRequest(m);
-					
+
 				}
 
 			}

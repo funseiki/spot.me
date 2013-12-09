@@ -1,61 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:ignore="ContentDescription" >
 
     <ImageView
         android:id="@+id/invalid"
         android:layout_width="@dimen/verify_img_size"
         android:layout_height="@dimen/verify_img_size"
-        android:src="@drawable/failed" 
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/verify_margin_top"/>
-    
-	<LinearLayout
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_gravity="center"
-    	android:orientation="horizontal"
-    	android:layout_marginTop="10dp"
-    	android:layout_marginBottom="3dp">
-    
+        android:layout_marginTop="@dimen/verify_margin_top"
+        android:src="@drawable/failed" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
         <TextView
-	        android:id="@+id/miles"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/large_text_size"
-			android:textColor="@color/hlText"/>
-    
+            android:id="@+id/miles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hlText"
+            android:textSize="@dimen/large_text_size" />
+
         <TextView
-	        android:id="@+id/milesStr"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/milesStr" 
-			android:textSize="@dimen/large_text_size"
-			android:textColor="@color/buttonBorder"/>
+            android:id="@+id/milesStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/milesStr"
+            android:textColor="@color/buttonBorder"
+            android:textSize="@dimen/large_text_size" />
     </LinearLayout>
 
-	<TextView
-		android:id="@+id/faileMsgEnd"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/failedMsgEnd" 
-		android:textSize="@dimen/large_text_size"
-		android:textColor="@color/buttonBorder"
-		android:layout_marginBottom="20dp"
-		android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/faileMsgEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="@string/failedMsgEnd"
+        android:textColor="@color/buttonBorder"
+        android:textSize="@dimen/large_text_size" />
 
-	<Button
-	  android:id="@+id/cancel"
-	  android:layout_width="@dimen/large_button_width"
-	  android:layout_height="wrap_content"
-	  android:text="@string/back" 
-	  android:textColor="@color/buttonBorder"
-	  android:textSize="@dimen/large_text_size"
-	  android:background="@drawable/button_white_bg_round"
-	  android:layout_marginLeft="@dimen/button_margin"
-	 	
-	  android:layout_gravity="center"/>        
-    
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="@dimen/large_button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/button_margin"
+        android:background="@drawable/button_white_bg_round"
+        android:text="@string/back"
+        android:textColor="@color/buttonBorder"
+        android:textSize="@dimen/large_text_size" />
+
 </LinearLayout>

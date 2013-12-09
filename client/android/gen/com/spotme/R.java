@@ -92,7 +92,6 @@ public final class R {
         public static final int email=0x7f090000;
         public static final int faileMsgEnd=0x7f09002f;
         public static final int gallery=0x7f090011;
-        public static final int gallery1=0x7f090022;
         public static final int givenUp=0x7f09001f;
         public static final int givenUp_num=0x7f090020;
         public static final int hint=0x7f090012;
@@ -100,7 +99,7 @@ public final class R {
         public static final int imageView2=0x7f09002a;
         public static final int img=0x7f090025;
         public static final int invalid=0x7f09002c;
-        public static final int leaderboard=0x7f09000f;
+        public static final int leaderboard=0x7f09000d;
         public static final int listView1=0x7f09002b;
         public static final int locationName=0x7f090018;
         public static final int logout=0x7f09001b;
@@ -109,7 +108,8 @@ public final class R {
         public static final int orText=0x7f090003;
         public static final int password=0x7f090001;
         public static final int picPreview=0x7f090014;
-        public static final int profile=0x7f09000d;
+        public static final int pics=0x7f090022;
+        public static final int profile=0x7f09000f;
         public static final int recentfound=0x7f090021;
         public static final int send=0x7f090015;
         public static final int spot=0x7f090013;
@@ -138,8 +138,9 @@ public final class R {
         public static final int profile_fragment=0x7f030007;
         public static final int register=0x7f030008;
         public static final int row_layout=0x7f030009;
-        public static final int verify_correct=0x7f03000a;
-        public static final int verify_incorrect=0x7f03000b;
+        public static final int single_pic=0x7f03000a;
+        public static final int verify_correct=0x7f03000b;
+        public static final int verify_incorrect=0x7f03000c;
     }
     public static final class menu {
         public static final int login=0x7f080000;

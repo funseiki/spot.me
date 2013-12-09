@@ -36,6 +36,12 @@
         </activity>
         <activity android:name="NewSpot" >
         </activity>
+        <activity android:name="Profile" >
+        </activity>
+        <activity android:name="VerifyCorrect" >
+        </activity>
+        <activity android:name="VerifyIncorrect" >
+        </activity>
     </application>
 
 </manifest>

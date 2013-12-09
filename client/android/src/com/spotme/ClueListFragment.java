@@ -6,11 +6,11 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Dialog;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,28 +27,7 @@ public class ClueListFragment extends ListFragment {
 		// Message m = new Message(Utils.GET_TAG,
 		// Utils.mainClueListGetRequest,null);
 		// some demo data
-		JSONObject[] objects = new JSONObject[2];
-
-		JSONObject one = new JSONObject();
-		try {
-			one.put("clue", "hello world");
-			one.put("imgSrc",
-					"http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png");
-			one.put("spotId", "1");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		JSONObject two = new JSONObject();
-		try {
-			two.put("clue", "yolo");
-			two.put("imgSrc",
-					"http://icons.iconarchive.com/icons/deleket/button/256/Button-Next-icon.png");
-			two.put("spotId", "123");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		objects[0] = one;
-		objects[1] = two;
+		JSONObject[] objects = Utils.getClueListSampleData();
 
 		ClueAdapter adapter = new ClueAdapter(getActivity(),
 				R.layout.row_layout, objects);
@@ -62,7 +41,6 @@ public class ClueListFragment extends ListFragment {
 		TextView clue = (TextView) v.findViewById(R.id.clue);
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.popup);
-		dialog.setTitle(R.string.unlockConfirm);
 		TextView locationName = (TextView) dialog
 				.findViewById(R.id.locationName);
 		locationName.setText(clue.getText());
@@ -80,6 +58,8 @@ public class ClueListFragment extends ListFragment {
 				Log.i("GEOLOCATION_VERIFICATION", latitude + ", " + longitutde);
 
 				SpotMeSession session = SpotMeSession.getSession();
+
+				// composing request parameter
 				List<NameValuePair> pairs = new ArrayList<NameValuePair>(2);
 				pairs.add(new BasicNameValuePair("spotid", tv.getText()
 						.toString()));
@@ -95,6 +75,18 @@ public class ClueListFragment extends ListFragment {
 				JSONObject response = Utils.executeRequest(m);
 				Toast.makeText(getActivity(), response.toString(),
 						Toast.LENGTH_LONG).show();
+				dialog.dismiss();
+				if (Utils.getDataFromJsonObj(response, "success")
+						.equals("true")) {
+					// bring up the verify correct activity
+				} else {
+					// bring up the verify incorrect activity
+					response = Utils.getIncorrectSampleData();
+					Intent i = new Intent(getActivity(), VerifyIncorrect.class);
+					i.putExtra("distance",
+							Utils.getDataFromJsonObj(response, "distance"));
+					startActivity(i);
+				}
 			}
 		});
 		Button cancel = (Button) dialog.findViewById(R.id.cancel);
