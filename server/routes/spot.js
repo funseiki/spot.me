@@ -96,9 +96,22 @@ function spotRoute(app, Spot) {
         });
     });
 
-    app.post('/spot/comments/get', allowRequest, function(req, res) {
+    app.post('/spot/comment/get', allowRequest, function(req, res) {
         // Checks if verified..
-
+        var params = {
+            spotid: req.body.spotid
+        };
+        Spot.getComments(params, function(err, result) {
+            if(err) {
+                res.statusCode = 500;
+                res.json({
+                    message: "Unable to retrieve comments"
+                });
+            }
+            else {
+                res.json(result);
+            }
+        });
         // returns comments: [{userid: <>, imageurl: <>, message: <>, story: <null>}]
     });
 

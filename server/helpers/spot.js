@@ -184,6 +184,24 @@ var spot = {
             db.EndTransaction(err, result, locals.connection, main_callback);
         });
     },
+    getComments: function(params, main_callback) {
+        var locals = {};
+        var required_inputs = ['spotid'];
+        async.waterfall([
+            db.StartTransaction.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                utils.cleanAndPrune(required_inputs, params, callback);
+            },
+            function(clean_inputs, callback) {
+                locals.clean_inputs = clean_inputs;
+                var where = {spotid: clean_inputs.spotid};
+                locals.connection.query(QueryStrings.Spot.GET_COMMENTS, where, callback);
+            }
+        ], function(err, result) {
+            db.EndTransaction(err, result, locals.connection, main_callback);
+        });
+    },
     create: function(user, spot, main_callback) {
         var locals = {};
         // TODO: Add story to this at some point maybe

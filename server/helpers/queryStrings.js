@@ -22,6 +22,7 @@ var Spot = {
                                 //'ORDER BY SF.spotid asc'
 ,   CREATE_COMMENT: 'INSERT INTO comments SET ?'
 ,   CHECK_VERIFIED: 'SELECT * FROM spotsfound WHERE ? AND ?'
+,   GET_COMMENTS: 'SELECT * FROM comments WHERE ?'
 };
 
 var List = {
