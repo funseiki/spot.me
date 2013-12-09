@@ -20,6 +20,8 @@ var Spot = {
                                 'GROUP BY SF.spotid ' +
                                 'ORDER BY RAND() LIMIT 5'
                                 //'ORDER BY SF.spotid asc'
+,   CREATE_COMMENT: 'INSERT INTO comments SET ?'
+,   CHECK_VERIFIED: 'SELECT * FROM spotsfound WHERE ? AND ?'
 };
 
 var List = {

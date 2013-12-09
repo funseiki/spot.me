@@ -31,10 +31,16 @@ function spotRoute(app, Spot) {
                 }
                 if(err) {
                     console.log(err);
+                    res.statusCode = 500;
                     res.json({success: false, message: "Error creating spot"});
                 }
                 else {
-                    res.send({success: true});
+                    if(resp.message) {
+                        res.json(resp);
+                    }
+                    else {
+                        res.json({success: true})
+                    }
                 }
             });
         });
@@ -90,19 +96,42 @@ function spotRoute(app, Spot) {
         });
     });
 
-    app.post('/spot/list/current', allowRequest, function(req, res) {
-        // Expects:
-        // userid
-    });
-
     app.post('/spot/comments/get', allowRequest, function(req, res) {
         // Checks if verified..
 
         // returns comments: [{userid: <>, imageurl: <>, message: <>, story: <null>}]
     });
 
-    app.post('/spot/comments/create', allowRequest, function(req, res){
+    app.post('/spot/comment/create', allowRequest, function(req, res){
 
+        var user = req.user;
+
+        var imagePath = req.files.file.path,
+            imageName = req.files.file.originalFilename;
+        var new_comment= {
+            comment: req.body.comment,
+            imagePath: imagePath,
+            imageName: imageName,
+            spotid: req.body.spotid,
+            userid: user.id
+        };
+
+        Spot.createComment(new_comment, function(err, resp){
+            // Delete the temp file
+            fs.unlink(imagePath, function(fileError){
+                if(fileError) {
+                    console.log("Error deleting file", fileError);
+                }
+                if(err) {
+                    console.log("Routes::/spot/comment/create::Error:", err);
+                    res.statusCode = 500;
+                    res.json({success: false, message: "Error creating comment"});
+                }
+                else {
+                    res.json(resp);
+                }
+            });
+        });
     });
 }
 

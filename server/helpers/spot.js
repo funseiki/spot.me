@@ -134,6 +134,56 @@ var spot = {
             db.EndTransaction(err, result, locals.connection, main_callback);
         })
     },
+    createComment: function(params, main_callback) {
+        var locals = {};
+        var required_inputs = ['userid', 'spotid', 'imageName', 'imagePath', 'comment'];
+        async.waterfall([
+            db.StartTransaction.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                utils.cleanAndPrune(required_inputs, params, callback);
+            },
+            function(clean_inputs, callback) {
+                locals.clean_inputs = clean_inputs;
+                var where = [{spotid: clean_inputs.spotid}, {userid: clean_inputs.userid}];
+                locals.connection.query(QueryStrings.Spot.CHECK_VERIFIED, where, callback);
+            },
+            function(rows, fields, callback) {
+                if(!rows || !rows[0]) {
+                    callback(true, {
+                        success: false,
+                        message: 'Spot has not been found'
+                    });
+                    return;
+                }
+                this.makeImage({imageName: locals.clean_inputs.imageName, imagePath: locals.clean_inputs.imagePath}, 'comments', callback);
+            }.bind(this),
+            function(url, callback) {
+                var post = {
+                    spotid: locals.clean_inputs.spotid,
+                    creatorid: locals.clean_inputs.userid,
+                    message: locals.clean_inputs.comment,
+                    picture: url
+                }
+                locals.connection.query(QueryStrings.Spot.CREATE_COMMENT, post, callback);
+            },
+            function(rows, fields, callback) {
+                if(rows.insertId) {
+                    callback(null,{
+                        success: true
+                    });
+                }
+                else {
+                    callback(true,{
+                        success: false,
+                        message: "Unable to create comment"
+                    });
+                }
+            }
+        ], function(err, result){
+            db.EndTransaction(err, result, locals.connection, main_callback);
+        });
+    },
     create: function(user, spot, main_callback) {
         var locals = {};
         // TODO: Add story to this at some point maybe
