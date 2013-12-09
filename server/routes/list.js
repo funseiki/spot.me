@@ -39,7 +39,8 @@ function listRoute(app, List) {
                 res.statusCode = 500;
                 res.json({
                     success: false,
-                    message: "Unable to get list"
+                    message: "Unable to get list",
+                    results: []
                 });
                 return;
             }
