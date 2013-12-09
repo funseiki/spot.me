@@ -16,6 +16,10 @@ var Spot = {
     INVALID_SPOT: "This is not the spot",
 };
 
+var List = {
+    CANNOT_CREATE: "Unable to create list with those parameters"
+};
+
 var Database = {
     GENERIC: "Unable to access information at this time"
 };
@@ -29,6 +33,7 @@ var Errors = {
     Database: Database,
     Spot: Spot,
     General: General,
+    List: List,
     Log: function(message) {
         // Log more betterer
         console.log(message);
