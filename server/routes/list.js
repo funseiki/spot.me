@@ -31,8 +31,23 @@ function listRoute(app, List) {
         });
     });
 
-    app.post('/list/nearby', allowRequest, function(req, res) {
-
+    app.post('/list/current', allowRequest, function(req, res) {
+        var userid = req.user.id;
+        List.getCurrent(userid, function(err, result) {
+            if(err) {
+                console.log("Routes::/list/current::Error: ", err);
+                res.statusCode = 500;
+                res.json({
+                    success: false,
+                    message: "Unable to get list"
+                });
+                return;
+            }
+            res.json({
+                success: true,
+                results: result
+            });
+        });
     });
 }
 
