@@ -36,13 +36,17 @@ function routes(app, passport) {
         res.redirect('/');
     });
 
-    app.get('/testverify', function(req, res){
+    app.get('/test/verify', function(req, res){
         res.render("spotverify");
     });
 
-    app.get('/testspotget', function(req, res){
+    app.get('/test/spotget', function(req, res){
         res.render("getspots");
     });
+
+    app.get('/test/listcreate', function(req, res) {
+        res.render("listcreate");
+    })
 
 
     app.get('/', function(req, res){
