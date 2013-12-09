@@ -6,6 +6,8 @@ var User = {
 ,   CHECK_EXISTING_EMAIL      : 'SELECT email FROM users WHERE ?'
 ,   VERIFY_LOGIN              : 'SELECT U.id, U.nickname, U.email, U.password, U.emailConfirmed FROM users U WHERE ?'
 ,   SPOT_VERIFIED             : 'INSERT INTO spotsfound SET ?'
+,   GET_PROFILE: 'SELECT U.nickname, F.spotid, F.picture FROM users U ' +
+                'INNER JOIN allFoundSpots F ON F.finderid=U.id WHERE U.id=?'
 };
 
 var Spot = {

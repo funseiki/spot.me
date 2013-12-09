@@ -4,6 +4,7 @@
  **************************************/
 var check = require('validator').check,
     config = require('../config'),
+    allowRequest = require('./checkUser'),
     async = require('async');
 
 function userRoute(app, User) {
@@ -77,6 +78,24 @@ function userRoute(app, User) {
         ], function(err){
             res.json(locals.response);
         });
+    });
+
+    app.post('/user/profile', allowRequest, function(req, res){
+        var userid = req.user.id;
+        User.GetProfile(userid, function(err, result) {
+            if(err) {
+                res.statusCode =500;
+                res.json({
+                    success: false,
+                    message: "Unable to get profile"
+                });
+                return;
+            }
+            res.json({
+                success: true,
+                results: result
+            });
+        })
     });
 }
 

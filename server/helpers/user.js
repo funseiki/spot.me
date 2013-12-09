@@ -237,6 +237,21 @@ var user = {
             });
         callback(null);
     },
+    GetProfile: function(userid, callback) {
+        var locals = {};
+        async.waterfall([
+            db.GetConnection.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                utils.cleanAndPrune(['userid' ], {userid: userid}, callback);
+            },
+            function(clean_user, callback) {
+                locals.connection.query(QueryStrings.User.GET_PROFILE, clean_user.userid, callback);
+            }
+        ], function(err, result) {
+            db.EndConnection(err, result, locals.connection, callback);
+        })
+    },
     get: function(userid, query, callback) {
         var param = {id: userid};
 
