@@ -2,6 +2,7 @@ package com.spotme;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ProfileFragment extends Fragment {
 	@Override
@@ -31,8 +31,10 @@ public class ProfileFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int arg2,
 					long arg3) {
-				TextView tv = (TextView)v.findViewById(R.id.clue);
-				Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_LONG).show();
+				TextView tv = (TextView)v.findViewById(R.id.spotId);
+				Intent i = new Intent(getActivity(), VerifyCorrect.class);
+				i.putExtra("spotId", tv.getText().toString());
+				startActivity(i);
 			}
 		});
 		return result;

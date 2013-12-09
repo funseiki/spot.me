@@ -39,6 +39,7 @@ public class ClueListFragment extends ListFragment {
 		final TextView tv = (TextView) v.findViewById(R.id.spotId);
 		Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_LONG).show();
 		TextView clue = (TextView) v.findViewById(R.id.clue);
+		
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.popup);
 		TextView locationName = (TextView) dialog
@@ -79,6 +80,9 @@ public class ClueListFragment extends ListFragment {
 				if (Utils.getDataFromJsonObj(response, "success")
 						.equals("true")) {
 					// bring up the verify correct activity
+					Intent i = new Intent(getActivity(), VerifyCorrect.class);
+					i.putExtra("spotId", tv.getText().toString());
+					startActivity(i);
 				} else {
 					// bring up the verify incorrect activity
 					response = Utils.getIncorrectSampleData();

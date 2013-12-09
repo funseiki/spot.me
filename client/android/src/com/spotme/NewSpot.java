@@ -1,10 +1,6 @@
 package com.spotme;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
@@ -14,10 +10,8 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -69,35 +63,6 @@ public class NewSpot extends Activity {
 		});
 	}
 
-	public File convertBitmapToFile(Bitmap bm) {
-		File f = new File(getApplicationContext().getCacheDir(), "tmpFile.png");
-		try {
-			f.createNewFile();
-		} catch (IOException e) {
-			Log.i("NEW SPOT", "Fail to create file");
-			e.printStackTrace();
-		}
-
-		// Convert bitmap to byte array
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		bm.compress(CompressFormat.PNG, 0 /* ignored for PNG */, bos);
-		byte[] bitmapdata = bos.toByteArray();
-		FileOutputStream fos;
-		try {
-			fos = new FileOutputStream(f);
-			fos.write(bitmapdata);
-			fos.flush();
-			bos.flush();
-			fos.close();
-			bos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return f;
-	}
-
 	public void gatherInfoAndSendRequest() {
 
 		EditText hint = (EditText) findViewById(R.id.hint);
@@ -113,7 +78,8 @@ public class NewSpot extends Activity {
 		en.addTextBody("latitude", Double.toString(Utils.LATITUDE_DEFAULT));
 		en.addTextBody("longitude", Double.toString(Utils.LONGITUDE_DEFAULT));
 
-		File imgFile = convertBitmapToFile(getPic());
+		File imgFile = Utils.convertBitmapToFile(getApplicationContext(),
+				getPic());
 
 		en.addBinaryBody("file", imgFile, ContentType.create("image/png"),
 				"hello.png");

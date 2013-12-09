@@ -1,5 +1,10 @@
 package com.spotme;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -11,6 +16,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
 
 public class Utils {
@@ -100,6 +108,34 @@ public class Utils {
 		}
 		return obj;
 	}
+	public static File convertBitmapToFile(Context context, Bitmap bm) {
+		File f = new File(context.getCacheDir(), "tmpFile.png");
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			Log.i("NEW SPOT", "Fail to create file");
+			e.printStackTrace();
+		}
+
+		// Convert bitmap to byte array
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		bm.compress(CompressFormat.PNG, 0 /* ignored for PNG */, bos);
+		byte[] bitmapdata = bos.toByteArray();
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(f);
+			fos.write(bitmapdata);
+			fos.flush();
+			bos.flush();
+			fos.close();
+			bos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
 
 	public static JSONObject[] getCommentSampleData() {
 		JSONObject[] objects = new JSONObject[6];
@@ -119,7 +155,7 @@ public class Utils {
 			two.put("nickname", "olie");
 			two.put("time", "1111-00-00");
 			two.put("imgSrc",
-					"http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png");
+					"http://icons.iconarchive.com/icons/deleket/button/256/Button-Next-icon.png");
 			two.put("comment", "not much, just a shitty clue");
 			two.put("spotId", "1");
 		} catch (JSONException e) {
