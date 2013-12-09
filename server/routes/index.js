@@ -36,13 +36,19 @@ function routes(app, passport) {
         res.redirect('/');
     });
 
-    app.get('/', function(req, res){
-        res.render("imageform");
+    app.get('/testverify', function(req, res){
+        res.render("spotverify");
     });
 
-    app.get('/testspot', function(req, res){
-        res.render("spotverify");
-    })
+    app.get('/testspotget', function(req, res){
+        res.render("getspots");
+    });
+
+
+    app.get('/', function(req, res){
+        res.render("register");
+    });
+
 }
 
 module.exports = routes;
