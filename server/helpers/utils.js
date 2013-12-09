@@ -1,6 +1,8 @@
 var sanitizer = require('sanitizer'),
     check = require('validator').check,
-    async = require('async');
+    async = require('async'),
+    Message = require('./clientMessage'),
+    errors = require('./errors');
 
 var Utils = {
     // Utility Functions
