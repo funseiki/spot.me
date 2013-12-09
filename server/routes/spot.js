@@ -20,7 +20,7 @@ function spotRoute(app, Spot) {
             clue : req.body.clue,
             imagePath: imagePath,
             imageName: imageName,
-            story: "Here's a story " // We're not using this yet
+            story: req.body.story
         };
 
         Spot.create(user, new_spot, function(err, resp){
@@ -116,7 +116,6 @@ function spotRoute(app, Spot) {
     });
 
     app.post('/spot/comment/create', allowRequest, function(req, res){
-
         var user = req.user;
 
         var imagePath = req.files.file.path,
@@ -126,7 +125,7 @@ function spotRoute(app, Spot) {
             imagePath: imagePath,
             imageName: imageName,
             spotid: req.body.spotid,
-            userid: user.id
+            userid: user.id,
         };
 
         Spot.createComment(new_comment, function(err, resp){
