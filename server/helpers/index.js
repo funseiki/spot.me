@@ -2,5 +2,6 @@
 module.exports = {
     Database: require('./database'),
     User: require('./user'),
-    Spot: require('./spot')
+    Spot: require('./spot'),
+    List: require('./list')
 };
