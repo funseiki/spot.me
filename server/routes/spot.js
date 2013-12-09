@@ -40,7 +40,7 @@ function spotRoute(app, Spot) {
         });
     });
 
-    app.post('/spot/verify', allowRequest, function(req, res){
+    app.post('/spot/verify', allowRequest, function(req, res) {
         // Expects:
         // userid
         // latitude
@@ -67,6 +67,27 @@ function spotRoute(app, Spot) {
 
        // Returns: {success: true/false}
         //  {success: true, }
+    });
+
+    app.post('/spot/list/nearby', allowRequest, function(req, res) {
+        // Expects userid
+        var userid = req.user.id,
+            location = {
+                latitude: req.body.latitude,
+                longitude: req.body.longitude
+            };
+
+        Spot.getAvailableSpots(userid, location, function(err, results) {
+            if(err) {
+                res.statusCode = 500;
+                res.json({
+                    message: 'Unable to find spots'
+                });
+            }
+            else {
+                res.json(results);
+            }
+        });
     });
 
     app.post('/spot/list/current', allowRequest, function(req, res) {

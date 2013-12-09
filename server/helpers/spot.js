@@ -4,6 +4,7 @@ var db = require('./database'),
     async = require('async'),
     bcrypt = require('bcrypt'),
     sanitizer = require('sanitizer'),
+    valid = require('validator').sanitize,
     QueryStrings = require('./queryStrings'),
     Message = require('./clientMessage'),
     config = require('../config'),
@@ -104,6 +105,34 @@ var spot = {
         ], function(err, result) {
             db.EndTransaction(err, result, locals.connection, main_callback);
         });
+    },
+    getAvailableSpots: function(userid, location, main_callback) {
+        var locals = {};
+        var latRange = 200,
+            longRange = 200;
+        async.waterfall([
+            db.StartTransaction.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                var get = location;
+                get.userid = userid;
+                utils.cleanAndPrune(['userid', 'latitude', 'longitude'], get, callback);
+            },
+            function(clean_inputs, callback) {
+                // Interpret these values as intege
+                clean_inputs.latitude = valid(clean_inputs.latitude).toInt();
+                clean_inputs.longitude = valid(clean_inputs.longitude).toInt();
+                var id = clean_inputs.userid,
+                    latMin = clean_inputs.latitude - latRange,
+                    latMax = clean_inputs.latitude + latRange,
+                    longMin = clean_inputs.longitude - longRange,
+                    longMax = clean_inputs.longitude + longRange;
+                locals.connection.query(QueryStrings.Spot.GET_SPOTS_RAND_NOT_FOUND,
+                    [id, id, latMin, latMax, longMin, longMax], callback);
+            }
+        ], function(err, result) {
+            db.EndTransaction(err, result, locals.connection, main_callback);
+        })
     },
     create: function(user, spot, main_callback) {
         var locals = {};

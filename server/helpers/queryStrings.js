@@ -11,6 +11,15 @@ var User = {
 var Spot = {
     CREATE : 'INSERT INTO spots SET ?'
 ,   GET_LOCATION : 'SELECT latitude, longitude FROM spots WHERE ?'
+,   GET_SPOTS_RAND_NOT_FOUND: 'SELECT SF.spotid, SF.clue, SF.picture as picture_url from '+
+                           '(SELECT * FROM allFoundSpots) as SF ' +
+                           'WHERE  (SF.finderid is NULL OR SF.finderid<>?) ' +
+                           'AND (SF.creatorid<>?) ' +
+                           'AND (SF.latitude BETWEEN ? AND ?) '+
+                           'AND (SF.longitude BETWEEN ? AND ?) ' +
+                           'GROUP BY SF.spotid ' +
+                           'ORDER BY RAND() LIMIT 5'
+                           //'ORDER BY SF.spotid asc'
 };
 
 var Clue = {
