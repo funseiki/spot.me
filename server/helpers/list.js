@@ -33,8 +33,8 @@ var list = {
                 self.create({ownerid: clean_inputs.ownerid, title: clean_inputs.title, connection: locals.connection}, callback);
             },
             function(result, callback) {
-                var latRange = 10,
-                    longRange = 10;
+                var latRange = 100,
+                    longRange = 100;
                 locals.clean_inputs.latitude = valid(locals.clean_inputs.latitude).toFloat();
                 locals.clean_inputs.longitude = valid(locals.clean_inputs.longitude).toFloat();
 
@@ -56,7 +56,8 @@ var list = {
                         else {
                             callback(null, {
                                 success: true,
-                                message: "Successfully created list"
+                                message: "Successfully created list",
+                                listid: result.listid
                             });
                         }
                     });
