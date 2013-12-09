@@ -1,4 +1,5 @@
 var db = require('./database'),
+    List = require('./list'),
     utils = require('./utils'),
     errors = require('./errors').User,
     async = require('async'),
@@ -97,6 +98,7 @@ var user = {
                     callback (new Message(errors.NO_ID));
                 }
                 else {
+                    locals.user = rows[0];
                     var found_hash = rows[0].emailToken;
                     var clean_token = sanitizer.sanitize(token);
                     bcrypt.compare(clean_token, found_hash, callback);
@@ -118,8 +120,17 @@ var user = {
                     callback(new Message(errors.EXPIRED_TOKEN), false);
                 }
                 else {
-                    callback(null, true);
+                    List.createFromRandom({
+                        ownerid: locals.user.id,
+                        title: "My First List",
+                        latitude: locals.user.latitude,
+                        longitude: locals.user.longitude,
+                        connection: locals.connection
+                    }, callback);
                 }
+            },
+            function(results, cb) {
+                cb(null, {success: true});
             }
         ], function(err, rows, fields) {
             db.EndConnection(err, rows, locals.connection, callback);
