@@ -44,10 +44,10 @@ function userRoute(app, User) {
         errors = errors.concat(check(latitude).notNull().notEmpty().getErrors());
         errors = errors.concat(check(longitude).notNull().notEmpty().getErrors());
         if(errors.length > 0) {
-            res.send(
+            res.json({
                 success: true,
                 message: "A field has been left blank"
-            );
+            });
             return;
         }
 
@@ -77,7 +77,7 @@ function userRoute(app, User) {
             // Make sure the email isn't taken already
             async.apply(User.CheckEmailTaken.bind(User), email),
             function(isTaken, callback) {
-                locals.= "That email already exists!";
+                locals.message = "That email already exists!";
                 callback(null, name, email, password, latitude, longitude);
             },
             // If it isn't, let's register
