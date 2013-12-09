@@ -1,0 +1,11 @@
+!!!
+html
+    head
+
+    body
+        form(action='/spot/comment/create', method='POST', enctype="multipart/form-data")
+            input(type="text", placeholder="spot id", name="spotid")
+            input(type="text", placeholder="user id", name="userid")
+            input(type="text", placeholder="comment", name="comment")
+            input(type="file", name="file")
+            input(type='submit')

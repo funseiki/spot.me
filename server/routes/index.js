@@ -47,8 +47,11 @@ function routes(app, passport) {
 
     app.get('/test/listcreate', function(req, res) {
         res.render("listcreate");
-    })
+    });
 
+    app.get('/test/createcomment', function(req, res) {
+        res.render("createcomment");
+    })
 
     app.get('/', function(req, res){
         res.render("register");
