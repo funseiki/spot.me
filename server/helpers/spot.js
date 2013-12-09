@@ -120,8 +120,8 @@ var spot = {
             },
             function(clean_inputs, callback) {
                 // Interpret these values as intege
-                clean_inputs.latitude = valid(clean_inputs.latitude).toInt();
-                clean_inputs.longitude = valid(clean_inputs.longitude).toInt();
+                clean_inputs.latitude = valid(clean_inputs.latitude).toFloat();
+                clean_inputs.longitude = valid(clean_inputs.longitude).toFloat();
                 var id = clean_inputs.userid,
                     latMin = clean_inputs.latitude - latRange,
                     latMax = clean_inputs.latitude + latRange,
