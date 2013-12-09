@@ -125,9 +125,11 @@ var user = {
             db.EndConnection(err, rows, locals.connection, callback);
         });
     },
-    RegisterEmail: function(name, email, password, callback) {
+    RegisterEmail: function(name, email, password, latitude, longitude, callback) {
         var clean_email = sanitizer.sanitize(email);
         var clean_name = sanitizer.sanitize(name);
+        var clean_latitude = sanitizer.sanitize(latitude);
+        var clean_longitude = sanitizer.sanitize(longitude);
         var locals = {};
         async.waterfall([
             db.GetConnection.bind(db),
@@ -152,7 +154,7 @@ var user = {
             db.GenerateHash.bind(db),
             // Now attempt to insert into the database
             function(token_hash, cb) {
-                var post = {email: clean_email, nickname: clean_name, password: locals.hash, emailToken: token_hash};
+                var post = {email: clean_email, nickname: clean_name, password: locals.hash, emailToken: token_hash, latitude: clean_latitude, longitude: clean_longitude};
                 locals.connection.query(QueryStrings.User.REGISTRATION, post, cb);
             }
         ], function(err, row, fields) {

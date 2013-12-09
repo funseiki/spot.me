@@ -31,13 +31,17 @@ function userRoute(app, User) {
     {
         var email = req.body.email,
             password = req.body.password,
-            name = req.body.name;
+            name = req.body.name,
+            latitude = req.body.latitude,
+            longitude = req.body.longitude;
 
         var errors = [];
         // Check for blank fields
         errors = errors.concat(check(email).notNull().notEmpty().getErrors());
         errors = errors.concat(check(password).notNull().notEmpty().getErrors());
         errors = errors.concat(check(name).notNull().notEmpty().getErrors());
+        errors = errors.concat(check(latitude).notNull().notEmpty().getErrors());
+        errors = errors.concat(check(longitude).notNull().notEmpty().getErrors());
         if(errors.length > 0) {
             res.send("A field has been left blank");
             return;
@@ -45,7 +49,13 @@ function userRoute(app, User) {
 
         // Make sure the email string is properly formed
         if(check(email).isEmail().hasError()) {
-            res.send("Invalid Email");
+            res.statusCode = 403;
+            res.json({message: "Invalid Email"});
+            return;
+        }
+        if(check(latitude).isFloat().hasError() || check(latitude).isFloat().hasError()) {
+            res.statusCode = 403;
+            res.json({message: "Invalid Location"});
             return;
         }
 
@@ -55,17 +65,17 @@ function userRoute(app, User) {
             async.apply(User.CheckEmailTaken.bind(User), email),
             function(isTaken, callback) {
                 locals.response = "That email already exists!";
-                callback(null, name, email, password);
+                callback(null, name, email, password, latitude, longitude);
             },
             // If it isn't, let's register
             User.RegisterEmail.bind(User),
             function(new_user, callback) {
                 // TODO: Send a registration email here
-                locals.response = "Success, check your email in a bit to confirm your registration!";
+                locals.response = {message: "Success, check your email in a bit to confirm your registration!"};
                 User.SendRegistrationEmail(new_user, callback);
             }
         ], function(err){
-            res.send(locals.response);
+            res.json(locals.response);
         });
     });
 }
