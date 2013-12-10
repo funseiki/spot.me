@@ -32,9 +32,9 @@ var Spot = {
 ,   GET_SPOTS_NOT_MINE: 'SELECT S.spotid, S.clue, S.picture, SF.dateFound ' +
                     'FROM allspotclues S ' +
                     'LEFT JOIN spotsfound SF ON (S.spotid = SF.spotid AND SF.userid=?) ' +
-                    'WHERE (SF.creatorid<>?) ' +
-                    'AND (SF.latitude BETWEEN ? AND ?) '+
-                    'AND (SF.longitude BETWEEN ? AND ?) ' +
+                    'WHERE (S.creatorid<>?) ' +
+                    'AND (S.latitude BETWEEN ? AND ?) '+
+                    'AND (S.longitude BETWEEN ? AND ?) ' +
                     'GROUP BY SF.spotid ' +
                     'ORDER BY SF.spotid LIMIT 10'
 
