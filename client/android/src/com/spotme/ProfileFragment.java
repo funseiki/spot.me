@@ -38,12 +38,12 @@ public class ProfileFragment extends Fragment {
 		Message m = new Message(Utils.POST_TAG, Utils.serverURL
 				+ "user/profile/", entity);
 		JSONObject obj = Utils.executeRequest(m);
-		JSONObject[] data = Utils.getJSONArrayFromJsonObj(obj, "results");
-		
+		final JSONObject[] data = Utils.getJSONArrayFromJsonObj(obj, "results");
+
 		String nickname = Utils.getDataFromJsonObj(obj, "nickname");
 		TextView nameView = (TextView) result.findViewById(R.id.username);
 		nameView.setText(nickname);
-		
+
 		grid.setAdapter(new ClueAdapter(getActivity(), R.layout.single_pic,
 				data));
 
@@ -53,8 +53,10 @@ public class ProfileFragment extends Fragment {
 			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long arg3) {
 				TextView tv = (TextView) v.findViewById(R.id.spotId);
+				String imgURL = Utils.getDataFromJsonObj(data[pos], "picture");
 				Intent i = new Intent(getActivity(), VerifyCorrect.class);
 				i.putExtra("spotId", tv.getText().toString());
+				i.putExtra("imgURL", imgURL);
 				startActivity(i);
 			}
 		});
