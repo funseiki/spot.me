@@ -166,7 +166,7 @@ var spot = {
                     longMin = clean_inputs.longitude - longRange,
                     longMax = clean_inputs.longitude + longRange;
                 locals.connection.query(QueryStrings.Spot.GET_SPOTS_NOT_MINE,
-                    [id, latMin, latMax, longMin, longMax], callback);
+                    [id, id, latMin, latMax, longMin, longMax], callback);
             }
         ], function(err, result) {
             db.EndTransaction(err, result, locals.connection, main_callback);

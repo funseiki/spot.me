@@ -29,8 +29,9 @@ var Spot = {
 ,   GET_COMMENTS: 'SELECT U.nickname, C.message, C.picture, C.dateCommented FROM comments C ' +
                   'INNER JOIN users U on C.creatorid = U.id '+
                   'WHERE ? order by dateCommented asc'
-,   GET_SPOTS_NOT_MINE: 'SELECT SF.spotid, SF.clue, SF.picture, IFNULL(dateFound, \'NOT_FOUND\') as dateFound '+
-                    'FROM allfoundspots as SF ' +
+,   GET_SPOTS_NOT_MINE: 'SELECT S.spotid, S.clue, S.picture, SF.dateFound ' +
+                    'FROM allspotclues S ' +
+                    'LEFT JOIN spotsfound SF ON (S.spotid = SF.spotid AND SF.userid=?) ' +
                     'WHERE (SF.creatorid<>?) ' +
                     'AND (SF.latitude BETWEEN ? AND ?) '+
                     'AND (SF.longitude BETWEEN ? AND ?) ' +
