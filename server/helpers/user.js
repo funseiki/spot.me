@@ -269,7 +269,7 @@ var user = {
                     return;
                 }
                 var out = {
-                    nickname: locals.nickname;
+                    nickname: locals.nickname,
                     success: true,
                     results: rows
                 };
