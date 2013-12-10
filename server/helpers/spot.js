@@ -8,8 +8,6 @@ var db = require('./database'),
     QueryStrings = require('./queryStrings'),
     Message = require('./clientMessage'),
     config = require('../config'),
-    knox = require('knox'),
-    AWS = require('aws-sdk'),
     path = require('path'),
     s3 = require('aws2js').load('s3', config.aws.keys.accessKeyId, config.aws.keys.secretAccessKey);
     s3.setBucket(config.aws.bucket),
