@@ -8,14 +8,14 @@ var User = {
 ,   SPOT_VERIFIED             : 'INSERT INTO spotsfound SET ?'
 ,   GET_NICKNAME: 'SELECT nickname from users WHERE ?'
 ,   GET_PROFILE: 'SELECT F.spotid, F.picture, F.dateFound FROM users U ' +
-                'INNER JOIN allFoundSpots F ON F.finderid=U.id WHERE U.id=?'
+                'INNER JOIN allfoundspots ON F.finderid=U.id WHERE U.id=?'
 };
 
 var Spot = {
     CREATE : 'INSERT INTO spots SET ?'
 ,   GET_LOCATION : 'SELECT latitude, longitude FROM spots WHERE ?'
 ,   GET_SPOTS_RAND_NOT_FOUND:   'SELECT SF.spotid, SF.clue, SF.picture as picture_url from '+
-                                '(SELECT * FROM allFoundSpots) as SF ' +
+                                '(SELECT * FROM allfoundspots) as SF ' +
                                 'WHERE  (SF.finderid is NULL OR SF.finderid<>?) ' +
                                 'AND (SF.creatorid<>?) ' +
                                 'AND (SF.latitude BETWEEN ? AND ?) '+
@@ -35,7 +35,7 @@ var List = {
     CREATE: 'INSERT INTO userlists SET ?'
 ,   INSERT_RANDOM:  'INSERT INTO listcontains(spotid, listid) ' +
                     '(SELECT  SF.spotid, ? from '+
-                    '(SELECT * FROM allFoundSpots) as SF ' +
+                    '(SELECT * FROM allfoundspots) as SF ' +
                     'WHERE  (SF.finderid is NULL OR SF.finderid<>?) ' +
                     'AND (SF.creatorid<>?) ' +
                     'AND (SF.latitude BETWEEN ? AND ?) '+
