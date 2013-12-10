@@ -110,10 +110,8 @@ function spotRoute(app, Spot) {
                 });
             }
             else {
-                res.json({
-                    success: true,
-                    results: result
-                });
+                result.success = true;
+                res.json(result);
             }
         });
         // returns comments: [{userid: <>, imageurl: <>, message: <>, story: <null>}]
