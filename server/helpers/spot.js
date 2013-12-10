@@ -96,7 +96,7 @@ var spot = {
                         });
                         return;
                     }
-                    locals.connection(QueryStrings.Spot.GET_SPOT_DATA, {id: locals.clean_inputs.spotid}, callback);
+                    locals.connection.query(QueryStrings.Spot.GET_SPOT_DATA, {id: locals.clean_inputs.spotid}, callback);
                 });
             },
             function(rows, fields, callback) {
