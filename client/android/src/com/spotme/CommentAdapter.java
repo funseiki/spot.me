@@ -52,8 +52,8 @@ public class CommentAdapter extends ArrayAdapter<JSONObject> {
 
 		String nickname = Utils.getDataFromJsonObj(obj, "nickname");
 		String time = Utils.getDataFromJsonObj(obj, "time");
-		String imgSrc = Utils.getDataFromJsonObj(obj, "imgSrc");
-		String comment = Utils.getDataFromJsonObj(obj, "comment");
+		String imgSrc = Utils.getDataFromJsonObj(obj, "picture");
+		String comment = Utils.getDataFromJsonObj(obj, "message");
 
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
