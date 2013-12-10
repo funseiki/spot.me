@@ -8,7 +8,7 @@ var User = {
 ,   SPOT_VERIFIED             : 'INSERT INTO spotsfound SET ?'
 ,   GET_NICKNAME: 'SELECT nickname from users WHERE ?'
 ,   GET_PROFILE: 'SELECT F.spotid, F.picture, F.dateFound FROM users U ' +
-                'INNER JOIN allfoundspots ON F.finderid=U.id WHERE U.id=?'
+                'INNER JOIN allfoundspots F ON F.finderid=U.id WHERE U.id=?'
 };
 
 var Spot = {
