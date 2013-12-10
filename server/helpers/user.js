@@ -268,9 +268,11 @@ var user = {
                     });
                     return;
                 }
-                var out = rows;
-                out.nickname = locals.nickname;
-                out.success = true;
+                var out = {
+                    nickname: locals.nickname;
+                    success: true,
+                    results: rows
+                };
                 callback(null, out);
             }
         ], function(err, result) {
