@@ -106,10 +106,7 @@ function userRoute(app, User) {
                 });
                 return;
             }
-            res.json({
-                success: true,
-                results: result
-            });
+            res.json(result);
         })
     });
 }
