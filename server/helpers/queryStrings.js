@@ -26,7 +26,9 @@ var Spot = {
 ,   CREATE_COMMENT: 'INSERT INTO comments SET ?'
 ,   CHECK_VERIFIED: 'SELECT * FROM spotsfound WHERE ? AND ?'
 ,   GET_SPOT_DATA: 'SELECT picture FROM spots WHERE ?'
-,   GET_COMMENTS: 'SELECT * FROM comments WHERE ? order by dateCommented asc'
+,   GET_COMMENTS: 'SELECT U.nickname, C.message, C.picture, C.dateCommented FROM comments C ' +
+                  'INNER JOIN users U on C.creatorid = U.id '+
+                  'WHERE ? order by dateCommented asc'
 };
 
 var List = {
