@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ClueListFragment extends ListFragment {
 
@@ -42,7 +41,6 @@ public class ClueListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		final TextView tv = (TextView) v.findViewById(R.id.spotId);
-		Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_LONG).show();
 		TextView clue = (TextView) v.findViewById(R.id.clue);
 
 		final Dialog dialog = new Dialog(getActivity());
@@ -80,8 +78,6 @@ public class ClueListFragment extends ListFragment {
 				Message m = new Message(Utils.POST_TAG, Utils.serverURL
 						+ "spot/verify/", entity);
 				JSONObject response = Utils.executeRequest(m);
-				Toast.makeText(getActivity(), response.toString(),
-						Toast.LENGTH_LONG).show();
 				dialog.dismiss();
 				if (Utils.getDataFromJsonObj(response, "success")
 						.equals("true")) {

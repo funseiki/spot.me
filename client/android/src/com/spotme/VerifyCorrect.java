@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class VerifyCorrect extends Activity {
 	private Bitmap commentPic;
@@ -116,13 +117,26 @@ public class VerifyCorrect extends Activity {
 				builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 				builder.addTextBody("comment", text);
 				builder.addTextBody("userid", userid);
+				String spotid = getIntent().getExtras().getString("spotId");
+				builder.addTextBody("spotid", spotid);
 
 				File imgbody = Utils.convertBitmapToFile(
 						getApplicationContext(), commentPic);
 				builder.addBinaryBody("file", imgbody,
 						ContentType.create("image/png"), "hi.png");
-				// final HttpEntity entity = builder.build();
+				final HttpEntity entity = builder.build();
 				// create message and send request
+				Message m = new Message(Utils.POST_TAG, Utils.serverURL
+						+ "spot/comment/create", entity);
+				JSONObject obj = Utils.executeRequest(m);
+				if (Utils.getDataFromJsonObj(obj, "success").equals("true")) {
+					Toast.makeText(getApplicationContext(),
+							"Comment succeeded", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Comment failed. Please retry.", Toast.LENGTH_SHORT)
+							.show();
+				}
 			}
 		});
 	}

@@ -1,5 +1,13 @@
 package com.spotme;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -23,15 +31,28 @@ public class ProfileFragment extends Fragment {
 		// send a request to the server and get the response in json object
 		// format
 		// for now, just use the sample object in the Utils class.
+		SpotMeSession session = SpotMeSession.getSession();
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
+		pairs.add(new BasicNameValuePair("userid", session.getUserId()));
+		HttpEntity entity = Utils.convertToEntity(pairs);
+		Message m = new Message(Utils.POST_TAG, Utils.serverURL
+				+ "user/profile/", entity);
+		JSONObject obj = Utils.executeRequest(m);
+		JSONObject[] data = Utils.getJSONArrayFromJsonObj(obj, "results");
+		
+		String nickname = Utils.getDataFromJsonObj(obj, "nickname");
+		TextView nameView = (TextView) result.findViewById(R.id.username);
+		nameView.setText(nickname);
+		
 		grid.setAdapter(new ClueAdapter(getActivity(), R.layout.single_pic,
-				Utils.getClueListSampleData()));
+				data));
 
 		grid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int arg2,
+			public void onItemClick(AdapterView<?> av, View v, int pos,
 					long arg3) {
-				TextView tv = (TextView)v.findViewById(R.id.spotId);
+				TextView tv = (TextView) v.findViewById(R.id.spotId);
 				Intent i = new Intent(getActivity(), VerifyCorrect.class);
 				i.putExtra("spotId", tv.getText().toString());
 				startActivity(i);
