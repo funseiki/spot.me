@@ -8,7 +8,9 @@ var check = require('validator').check,
     allowRequest = require('./checkUser'),
     fs = require('fs');
 
-function listRoute(app, List) {
+function listRoute(app, Controllers) {
+    var List = Controllers.List,
+        Spot = Controllers.Spot;
     app.post('/list/create', allowRequest, function(req, res) {
         var listInputs = {
             ownerid: req.user.id,
@@ -33,7 +35,11 @@ function listRoute(app, List) {
 
     app.post('/list/current', allowRequest, function(req, res) {
         var userid = req.user.id;
-        List.getCurrent(userid, function(err, result) {
+        var location= {
+            latitude : req.body.latitude,
+            longitude : req.body.longitude,
+        };
+        Spot.getAllSpots(userid, location, function(err, result) {
             if(err) {
                 console.log("Routes::/list/current::Error: ", err);
                 res.statusCode = 500;

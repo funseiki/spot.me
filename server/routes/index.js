@@ -7,7 +7,7 @@ function routes(app, passport) {
     // Routes
     require('./user')(app, controllers.User);
     require('./spot')(app, controllers.Spot);
-    require('./list')(app, controllers.List);
+    require('./list')(app, controllers);
 
     // Login/logout
     // The database helper will verify the user

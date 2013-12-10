@@ -144,6 +144,34 @@ var spot = {
             db.EndTransaction(err, result, locals.connection, main_callback);
         })
     },
+    getAllSpots: function(userid, location, main_callback) {
+        var locals = {};
+        var latRange = 200,
+            longRange = 200;
+        async.waterfall([
+            db.StartTransaction.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                var get = location;
+                get.userid = userid;
+                utils.cleanAndPrune(['userid', 'latitude', 'longitude'], get, callback);
+            },
+            function(clean_inputs, callback) {
+                // Interpret these values as intege
+                clean_inputs.latitude = valid(clean_inputs.latitude).toFloat();
+                clean_inputs.longitude = valid(clean_inputs.longitude).toFloat();
+                var id = clean_inputs.userid,
+                    latMin = clean_inputs.latitude - latRange,
+                    latMax = clean_inputs.latitude + latRange,
+                    longMin = clean_inputs.longitude - longRange,
+                    longMax = clean_inputs.longitude + longRange;
+                locals.connection.query(QueryStrings.Spot.GET_SPOTS_NOT_MINE,
+                    [id, latMin, latMax, longMin, longMax], callback);
+            }
+        ], function(err, result) {
+            db.EndTransaction(err, result, locals.connection, main_callback);
+        })
+    },
     createComment: function(params, main_callback) {
         var locals = {};
         var required_inputs = ['userid', 'spotid', 'imageName', 'imagePath', 'comment'];
