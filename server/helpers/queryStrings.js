@@ -35,7 +35,6 @@ var Spot = {
                     'WHERE (S.creatorid<>?) ' +
                     'AND (S.latitude BETWEEN ? AND ?) '+
                     'AND (S.longitude BETWEEN ? AND ?) ' +
-                    'GROUP BY SF.spotid ' +
                     'ORDER BY SF.spotid LIMIT 10'
 
 };
