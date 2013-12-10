@@ -107,10 +107,9 @@ var spot = {
                     });
                     return;
                 }
-                callback(null, {
-                    success: true,
-                    results: rows[0]
-                });
+                var out = rows[0];
+                out.success = true;
+                callback(null, out);
             }
         ], function(err, result) {
             db.EndTransaction(err, result, locals.connection, main_callback);
