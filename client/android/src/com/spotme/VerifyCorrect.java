@@ -70,8 +70,10 @@ public class VerifyCorrect extends Activity {
 		setContentView(R.layout.verify_correct);
 		String spotid = getIntent().getExtras().getString("spotId");
 		String pictureURL = getIntent().getExtras().getString("imgURL");
-		List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
-		pairs.add(new BasicNameValuePair("spotId", spotid));
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>(2);
+		pairs.add(new BasicNameValuePair("spotid", spotid));
+		SpotMeSession session = SpotMeSession.getSession();
+		pairs.add(new BasicNameValuePair("userid", session.getUserId()));
 
 		HttpEntity entity = Utils.convertToEntity(pairs);
 		Message m = new Message(Utils.POST_TAG, Utils.serverURL
