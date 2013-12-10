@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -24,6 +25,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -67,15 +69,18 @@ public class VerifyCorrect extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.verify_correct);
 		String spotid = getIntent().getExtras().getString("spotId");
-
+		String pictureURL = getIntent().getExtras().getString("imgURL");
 		List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
 		pairs.add(new BasicNameValuePair("spotId", spotid));
 
-		// HttpEntity entity = Utils.convertToEntity(pairs);
-		// Message m = new Message(Utils.POST_TAG, Utils.serverURL + "",
-		// entity);
-		// JSONObject response = Utils.executeRequest(m);
-		JSONObject[] response = Utils.getCommentSampleData();
+		HttpEntity entity = Utils.convertToEntity(pairs);
+		Message m = new Message(Utils.POST_TAG, Utils.serverURL
+				+ "spot/comment/get", entity);
+		JSONObject obj = Utils.executeRequest(m);
+		Log.d(Utils.CLUE_ADAPTER_TAG, obj.toString());
+
+		JSONObject[] response = Utils.getJSONArrayFromJsonObj(obj, "results");
+
 		CommentAdapter adapter = new CommentAdapter(getApplicationContext(),
 				R.layout.comment_row, response);
 		ListView lv = (ListView) findViewById(R.id.commentList);
@@ -83,9 +88,9 @@ public class VerifyCorrect extends Activity {
 		setupCameraButton();
 		setupCancelButton();
 		setupSendCommentButton();
-		String samplePicUrl = "https://s3.amazonaws.com/spotme/spots/1fd9bc7606f730b506b29ac4e1a609fc7894c3a7a1e6f893928734fd4b12cf31951fd8ac913cfedbcc66f926c40e53ab.png";
+
 		try {
-			new DownloadImg().execute(samplePicUrl).get();
+			new DownloadImg().execute(pictureURL).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {

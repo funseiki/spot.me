@@ -88,6 +88,7 @@ public class ClueListFragment extends ListFragment {
 					// bring up the verify correct activity
 					Intent i = new Intent(getActivity(), VerifyCorrect.class);
 					i.putExtra("spotId", tv.getText().toString());
+					i.putExtra("imgURL", Utils.getDataFromJsonObj(response, "picture"));
 					startActivity(i);
 				} else {
 					// bring up the verify incorrect activity
