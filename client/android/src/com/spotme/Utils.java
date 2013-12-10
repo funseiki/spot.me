@@ -28,8 +28,8 @@ public class Utils {
 	public final static String GET_TAG = "GET";
 	public final static String RESPONSE_TAG = "RESPONSE";
 	// private final static String serverURL = "http://127.0.0.1:8080/";
-	public final static String serverURL = "http://10.0.2.2:8080/";
-	// public final static String serverURL = "https://spot-me.herokuapp.com";
+	// public final static String serverURL = "http://10.0.2.2:8080/";
+	public final static String serverURL = "https://spot-me.herokuapp.com";
 	public final static String mainClueListGetRequest = "";
 	public static final String CLUE_ADAPTER_TAG = "ClueAdapter";
 

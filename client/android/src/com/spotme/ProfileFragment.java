@@ -40,6 +40,9 @@ public class ProfileFragment extends Fragment {
 		JSONObject obj = Utils.executeRequest(m);
 		final JSONObject[] data = Utils.getJSONArrayFromJsonObj(obj, "results");
 
+		TextView unlockNum = (TextView) result.findViewById(R.id.unlock_num);
+		unlockNum.setText(data.length + "");
+
 		String nickname = Utils.getDataFromJsonObj(obj, "nickname");
 		TextView nameView = (TextView) result.findViewById(R.id.username);
 		nameView.setText(nickname);

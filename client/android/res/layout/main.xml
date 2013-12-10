@@ -10,7 +10,8 @@
         android:name="com.spotme.MainControlFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-     <LinearLayout
+    <!--
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -46,7 +47,9 @@
 			android:text="@string/endUnlockedMsg"
 	        android:textSize="@dimen/sec_text_size"
    	        android:textColor="@color/secTextColor"/>		   
-	</LinearLayout> 
+	</LinearLayout>
+    -->
+
     <fragment
         android:id="@+id/cluelist"
         android:name="com.spotme.ClueListFragment"

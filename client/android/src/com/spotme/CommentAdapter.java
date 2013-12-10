@@ -51,7 +51,8 @@ public class CommentAdapter extends ArrayAdapter<JSONObject> {
 		JSONObject obj = objs[position];
 
 		String nickname = Utils.getDataFromJsonObj(obj, "nickname");
-		String time = Utils.getDataFromJsonObj(obj, "time");
+		String time = Utils.getDataFromJsonObj(obj, "dateCommented");
+
 		String imgSrc = Utils.getDataFromJsonObj(obj, "picture");
 		String comment = Utils.getDataFromJsonObj(obj, "message");
 
@@ -65,7 +66,7 @@ public class CommentAdapter extends ArrayAdapter<JSONObject> {
 					.findViewById(R.id.img);
 			convertView.setTag(viewHolder);
 		}
-		
+
 		TextView nicknameView = (TextView) convertView
 				.findViewById(R.id.nickname);
 		nicknameView.setText(nickname);

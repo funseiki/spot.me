@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ClueListFragment extends ListFragment {
+	private JSONObject[] objects;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -28,18 +29,19 @@ public class ClueListFragment extends ListFragment {
 		List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
 		pairs.add(new BasicNameValuePair("userid", session.getUserId()));
 		HttpEntity en = Utils.convertToEntity(pairs);
-		Message m = new Message(Utils.POST_TAG, Utils.serverURL+"list/current/", en);
+		Message m = new Message(Utils.POST_TAG, Utils.serverURL
+				+ "list/current/", en);
 		JSONObject reponse = Utils.executeRequest(m);
 		Log.d(Utils.CLUE_ADAPTER_TAG, reponse.toString());
-		JSONObject[] objects = Utils.getJSONArrayFromJsonObj(reponse, "results");
-		
+		objects = Utils.getJSONArrayFromJsonObj(reponse, "results");
+
 		ClueAdapter adapter = new ClueAdapter(getActivity(),
 				R.layout.row_layout, objects);
 		setListAdapter(adapter);
 	}
 
 	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(ListView l, View v, final int position, long id) {
 		final TextView tv = (TextView) v.findViewById(R.id.spotId);
 		TextView clue = (TextView) v.findViewById(R.id.clue);
 
@@ -84,14 +86,28 @@ public class ClueListFragment extends ListFragment {
 					// bring up the verify correct activity
 					Intent i = new Intent(getActivity(), VerifyCorrect.class);
 					i.putExtra("spotId", tv.getText().toString());
-					i.putExtra("imgURL", Utils.getDataFromJsonObj(response, "picture"));
+					i.putExtra("imgURL",
+							Utils.getDataFromJsonObj(response, "picture"));
 					startActivity(i);
 				} else {
-					// bring up the verify incorrect activity
-					Intent i = new Intent(getActivity(), VerifyIncorrect.class);
-					i.putExtra("distance",
-							Utils.getDataFromJsonObj(response, "distance"));
-					startActivity(i);
+					String distance = Utils.getDataFromJsonObj(response,
+							"distance");
+					if (distance == null) {
+						Intent i = new Intent(getActivity(),
+								VerifyCorrect.class);
+						i.putExtra("spotId", tv.getText().toString());
+						i.putExtra("imgURL",
+								Utils.getDataFromJsonObj(objects[position], "picture"));
+						startActivity(i);
+
+					} else {
+						// bring up the verify incorrect activity
+						Intent i = new Intent(getActivity(),
+								VerifyIncorrect.class);
+						i.putExtra("distance", distance);
+
+						startActivity(i);
+					}
 				}
 			}
 		});
@@ -105,6 +121,14 @@ public class ClueListFragment extends ListFragment {
 		});
 		dialog.show();
 
+	}
+
+	public JSONObject[] getObjects() {
+		return objects;
+	}
+
+	public void setObjects(JSONObject[] objects) {
+		this.objects = objects;
 	}
 
 }

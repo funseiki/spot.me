@@ -18,8 +18,7 @@ public class VerifyIncorrect extends Activity {
 		setContentView(R.layout.verify_incorrect);
 		TextView tv = (TextView) findViewById(R.id.miles);
 		String distance = getIntent().getExtras().getString("distance");
-		tv.setText(distance+" ");
-
+		tv.setText(distance + " ");
 		Button back = (Button) findViewById(R.id.cancel);
 		back.setOnClickListener(new View.OnClickListener() {
 

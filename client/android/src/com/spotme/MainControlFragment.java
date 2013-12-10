@@ -35,6 +35,15 @@ public class MainControlFragment extends Fragment {
 			}
 		});
 
+		Button main = (Button) result.findViewById(R.id.main);
+		main.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent main = new Intent(getActivity(), Main.class);
+				startActivity(main);
+			}
+		});
 		return result;
 	}
 }
