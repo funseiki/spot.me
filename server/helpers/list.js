@@ -71,6 +71,22 @@ var list = {
             }
         });
     },
+    getCurrent_OLD: function(userid, main_callback) {
+        var locals = {};
+        var self = this;
+        async.waterfall([
+            db.GetConnection.bind(db),
+            function(connection, callback) {
+                locals.connection = connection;
+                utils.cleanAndPrune(['userid'], {userid: userid}, callback);
+            },
+            function(clean_user, callback) {
+                locals.connection.query(QueryStrings.List.GET_CURRENT, clean_user.userid, callback);
+            }
+        ], function(err, result) {
+            db.EndConnection(err, result, locals.connection, main_callback);
+        });
+    },
     getCurrent: function(userid, main_callback) {
         var locals = {};
         var self = this;

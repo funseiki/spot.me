@@ -42,10 +42,18 @@ var List = {
                     'AND (SF.longitude BETWEEN ? AND ?) ' +
                     'GROUP BY SF.spotid ' +
                     'ORDER BY RAND() LIMIT 5)'
-,   GET_CURRENT: 'SELECT S.spotid, S.story, S.clue, S.picture, IFNULL(dateFound, \'NOT_FOUND\') as dateFound FROM listinfo L ' +
+,   GET_CURRENT_OLD: 'SELECT S.spotid, S.story, S.clue, S.picture, IFNULL(dateFound, \'NOT_FOUND\') as dateFound FROM listinfo L ' +
         'INNER JOIN allspotclues S on L.spotid=S.spotid ' +
         'LEFT JOIN spotsfound F on F.userid=L.ownerid ' +
         'WHERE L.ownerid=? AND L.isCurrent=1'
+,   GET_CURRENT: 'SELECT SF.spotid, SF.clue, SF.picture from IFNULL(dateFound, \'NOT_FOUND\') as dateFound '+
+                    '(SELECT * FROM allfoundspots) as SF ' +
+                    'WHERE (SF.creatorid<>?) ' +
+                    'AND (SF.latitude BETWEEN ? AND ?) '+
+                    'AND (SF.longitude BETWEEN ? AND ?) ' +
+                    'GROUP BY SF.spotid ' +
+                    'ORDER BY SF.spotid LIMIT 10'
+
 };
 
 var Clue = {
