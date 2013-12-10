@@ -240,7 +240,7 @@ var user = {
     GetProfile: function(userid, callback) {
         var locals = {};
         async.waterfall([
-            db.GetTransaction.bind(db),
+            db.StartTransaction.bind(db),
             function(connection, callback) {
                 locals.connection = connection;
                 utils.cleanAndPrune(['userid' ], {userid: userid}, callback);
