@@ -109,7 +109,7 @@ var spot = {
                 }
                 callback(null, {
                     success: true,
-                    results: rows
+                    results: rows[0]
                 });
             }
         ], function(err, result) {
