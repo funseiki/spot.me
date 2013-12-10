@@ -105,11 +105,15 @@ function spotRoute(app, Spot) {
             if(err) {
                 res.statusCode = 500;
                 res.json({
+                    success: false,
                     message: "Unable to retrieve comments"
                 });
             }
             else {
-                res.json(result);
+                res.json({
+                    success: true,
+                    results: result
+                });
             }
         });
         // returns comments: [{userid: <>, imageurl: <>, message: <>, story: <null>}]
