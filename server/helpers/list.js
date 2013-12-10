@@ -103,8 +103,8 @@ var list = {
             },
             function(connection, callback) {
                 locals.connection = connection;
-                var get = {ownerid: params.ownerid, title: params.title};
-                utils.cleanAndPrune(['ownerid', 'title'], get, callback);
+                var get = {ownerid: params.ownerid, title: params.title, isCurrent: 1};
+                utils.cleanAndPrune(['ownerid', 'title', 'isCurrent'], get, callback);
             },
             function(clean_inputs, callback) {
                 locals.connection.query(QueryStrings.List.CREATE, clean_inputs, function(err, rows, fields){
