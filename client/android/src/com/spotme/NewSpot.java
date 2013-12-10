@@ -6,6 +6,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -68,15 +69,16 @@ public class NewSpot extends Activity {
 		EditText hint = (EditText) findViewById(R.id.hint);
 		String hintText = hint.getText().toString();
 
-		// EditText spot = (EditText)findViewById(R.id.spot);
-		// String spotText = spot.getText().toString();
+		EditText spot = (EditText) findViewById(R.id.spot);
+		String spotText = spot.getText().toString();
 
 		MultipartEntityBuilder en = MultipartEntityBuilder.create();
 		en.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 		en.addTextBody("userid", session.getUserId());
 		en.addTextBody("clue", hintText);
-		en.addTextBody("latitude", Double.toString(Utils.LATITUDE_DEFAULT));
-		en.addTextBody("longitude", Double.toString(Utils.LONGITUDE_DEFAULT));
+		en.addTextBody("latitude", Double.toString(gps.getLatitude()));
+		en.addTextBody("longitude", Double.toString(gps.getLongitude()));
+		en.addTextBody("story", spotText);
 
 		File imgFile = Utils.convertBitmapToFile(getApplicationContext(),
 				getPic());
@@ -85,15 +87,19 @@ public class NewSpot extends Activity {
 				"hello.png");
 
 		final HttpEntity entity = en.build();
-		Message m = new Message(Utils.POST_TAG,
-				Utils.serverURL + "spot/create", entity);
+		Message m = new Message(Utils.POST_TAG, Utils.serverURL
+				+ "spot/create/", entity);
 
-		Utils.executeRequest(m);
+		JSONObject obj = Utils.executeRequest(m);
 		imgFile.delete();
-		Toast.makeText(getApplicationContext(), "Send succeeded",
-				Toast.LENGTH_LONG).show();
-		shutdown();
-
+		if (Utils.getDataFromJsonObj(obj, "success").equals("true")) {
+			Toast.makeText(getApplicationContext(), "Send succeeded",
+					Toast.LENGTH_LONG).show();
+			shutdown();
+		} else {
+			Toast.makeText(getApplicationContext(), "Send failed. Please retry.",
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	private void setupCameraButton() {

@@ -31,7 +31,8 @@ public class ClueListFragment extends ListFragment {
 		HttpEntity en = Utils.convertToEntity(pairs);
 		Message m = new Message(Utils.POST_TAG, Utils.serverURL+"list/current/", en);
 		JSONObject reponse = Utils.executeRequest(m);
-		JSONObject[] objects = Utils.getJSONArrayFromJsonObj(reponse, "result");
+		Log.d(Utils.CLUE_ADAPTER_TAG, reponse.toString());
+		JSONObject[] objects = Utils.getJSONArrayFromJsonObj(reponse, "results");
 		
 		ClueAdapter adapter = new ClueAdapter(getActivity(),
 				R.layout.row_layout, objects);
