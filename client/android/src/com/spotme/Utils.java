@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +23,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
 
 public class Utils {
-
+	public final static String UTILS_TAG = "UTILS";
 	public final static String POST_TAG = "POST";
 	public final static String GET_TAG = "GET";
 	public final static String RESPONSE_TAG = "RESPONSE";
@@ -38,6 +39,27 @@ public class Utils {
 
 	public static final double LATITUDE_DEFAULT = 40.1137;
 	public static final double LONGITUDE_DEFAULT = -88.224;
+
+	public static JSONObject[] getJSONArrayFromJsonObj(JSONObject obj,
+			String name) {
+		JSONArray result = null;
+		try {
+			result = obj.getJSONArray(name);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.i(CLUE_ADAPTER_TAG, name + " does not exist in JSON object.");
+		}
+		JSONObject[] objs = new JSONObject[result.length()];
+		for (int i = 0; i < result.length(); i++) {
+			try {
+				objs[i] = result.getJSONObject(i);
+			} catch (JSONException e) {
+				Log.d(UTILS_TAG, objs[i].toString());
+				e.printStackTrace();
+			}
+		}
+		return objs;
+	}
 
 	/**
 	 * get data from json object
@@ -108,6 +130,7 @@ public class Utils {
 		}
 		return obj;
 	}
+
 	public static File convertBitmapToFile(Context context, Bitmap bm) {
 		File f = new File(context.getCacheDir(), "tmpFile.png");
 		try {

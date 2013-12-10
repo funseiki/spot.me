@@ -24,11 +24,15 @@ public class ClueListFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		// Message m = new Message(Utils.GET_TAG,
-		// Utils.mainClueListGetRequest,null);
-		// some demo data
-		JSONObject[] objects = Utils.getClueListSampleData();
 
+		SpotMeSession session = SpotMeSession.getSession();
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
+		pairs.add(new BasicNameValuePair("userid", session.getUserId()));
+		HttpEntity en = Utils.convertToEntity(pairs);
+		Message m = new Message(Utils.POST_TAG, Utils.serverURL+"list/current/", en);
+		JSONObject reponse = Utils.executeRequest(m);
+		JSONObject[] objects = Utils.getJSONArrayFromJsonObj(reponse, "result");
+		
 		ClueAdapter adapter = new ClueAdapter(getActivity(),
 				R.layout.row_layout, objects);
 		setListAdapter(adapter);
@@ -39,9 +43,10 @@ public class ClueListFragment extends ListFragment {
 		final TextView tv = (TextView) v.findViewById(R.id.spotId);
 		Toast.makeText(getActivity(), tv.getText(), Toast.LENGTH_LONG).show();
 		TextView clue = (TextView) v.findViewById(R.id.clue);
-		
+
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.popup);
+		dialog.setTitle("Verification");
 		TextView locationName = (TextView) dialog
 				.findViewById(R.id.locationName);
 		locationName.setText(clue.getText());
@@ -85,7 +90,6 @@ public class ClueListFragment extends ListFragment {
 					startActivity(i);
 				} else {
 					// bring up the verify incorrect activity
-					response = Utils.getIncorrectSampleData();
 					Intent i = new Intent(getActivity(), VerifyIncorrect.class);
 					i.putExtra("distance",
 							Utils.getDataFromJsonObj(response, "distance"));

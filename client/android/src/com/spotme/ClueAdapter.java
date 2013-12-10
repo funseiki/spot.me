@@ -50,9 +50,10 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 
 		JSONObject obj = objs[position];
 
-		String imgSrc = Utils.getDataFromJsonObj(obj, "imgSrc");
+		String imgSrc = Utils.getDataFromJsonObj(obj, "picture");
 		String clue = Utils.getDataFromJsonObj(obj, "clue");
-		String spotId = Utils.getDataFromJsonObj(obj, "spotId");
+		String spotId = Utils.getDataFromJsonObj(obj, "spotid");
+		String dateFound = Utils.getDataFromJsonObj(obj, "dateFound");
 
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
@@ -70,9 +71,11 @@ public class ClueAdapter extends ArrayAdapter<JSONObject> {
 		spotIdView.setText(spotId);
 
 		viewHolder = (ViewHolder) convertView.getTag();
-
-		new DownloadAsyncTask().execute(viewHolder);
-
+		if (dateFound.equals("NOT_FOUND")) {
+			viewHolder.imageView.setImageResource(R.drawable.spotting);
+		} else {
+			new DownloadAsyncTask().execute(viewHolder);
+		}
 		return convertView;
 	}
 

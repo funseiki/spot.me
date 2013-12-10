@@ -64,13 +64,11 @@ public class Login extends Activity {
 						+ "login/", entity);
 
 				// send request
-				String str;
 				try {
-					JSONObject response = Utils.executeRequest(m);
+					Toast.makeText(getApplicationContext(), "Logging in...",
+							Toast.LENGTH_LONG).show();
 
-					str = response.getString("login_success");
-					Toast.makeText(getApplicationContext(), (CharSequence) str,
-							Toast.LENGTH_SHORT).show();
+					JSONObject response = Utils.executeRequest(m);
 
 					if (response.getBoolean("login_success")) {
 						String userId = response.getString("userid");
@@ -81,6 +79,10 @@ public class Login extends Activity {
 						Intent main = new Intent(getApplicationContext(),
 								Main.class);
 						startActivity(main);
+					} else {
+						Toast.makeText(getApplicationContext(),
+								"Login failed. Please check you credentials",
+								Toast.LENGTH_LONG).show();
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
