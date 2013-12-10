@@ -24,6 +24,7 @@ var Spot = {
                                 //'ORDER BY SF.spotid asc'
 ,   CREATE_COMMENT: 'INSERT INTO comments SET ?'
 ,   CHECK_VERIFIED: 'SELECT * FROM spotsfound WHERE ? AND ?'
+,   GET_SPOT_DATA: 'SELECT picture FROM spots WHERE ?'
 ,   GET_COMMENTS: 'SELECT * FROM comments WHERE ? order by dateCommented asc'
 };
 

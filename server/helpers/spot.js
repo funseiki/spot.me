@@ -96,15 +96,28 @@ var spot = {
                         });
                         return;
                     }
-                    callback(null, {
-                        success: true,
-                        message: "You have successfully found the spot"
+                    locals.connection(QueryStrings.Spot.GET_SPOT_DATA, {id: locals.clean_inputs.spotid}, callback);
+                });
+            },
+            function(rows, fields, callback) {
+                if(!rows || !rows[0]) {
+                    callback(true, {
+                        success: false,
+                        message: "Unable to obtain spot data"
                     });
+                    return;
+                }
+                callback(null, {
+                    success: true,
+                    results: rows
                 });
             }
         ], function(err, result) {
             db.EndTransaction(err, result, locals.connection, main_callback);
         });
+    },
+    getSpotData: function(params, main_callback) {
+
     },
     getAvailableSpots: function(userid, location, main_callback) {
         var locals = {};
