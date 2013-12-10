@@ -46,8 +46,8 @@ var List = {
         'INNER JOIN allspotclues S on L.spotid=S.spotid ' +
         'LEFT JOIN spotsfound F on F.userid=L.ownerid ' +
         'WHERE L.ownerid=? AND L.isCurrent=1'
-,   GET_CURRENT: 'SELECT SF.spotid, SF.clue, SF.picture from IFNULL(dateFound, \'NOT_FOUND\') as dateFound '+
-                    '(SELECT * FROM allfoundspots) as SF ' +
+,   GET_CURRENT: 'SELECT SF.spotid, SF.clue, SF.picture, IFNULL(dateFound, \'NOT_FOUND\') as dateFound '+
+                    'FROM allfoundspots as SF ' +
                     'WHERE (SF.creatorid<>?) ' +
                     'AND (SF.latitude BETWEEN ? AND ?) '+
                     'AND (SF.longitude BETWEEN ? AND ?) ' +
