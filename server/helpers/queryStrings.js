@@ -38,7 +38,7 @@ var List = {
                     'AND (SF.longitude BETWEEN ? AND ?) ' +
                     'GROUP BY SF.spotid ' +
                     'ORDER BY RAND() LIMIT 5)'
-,   GET_CURRENT: 'SELECT S.spotid, S.story, S.clue, S.picture, F.dateFound FROM listinfo L ' +
+,   GET_CURRENT: 'SELECT S.spotid, S.story, S.clue, S.picture, IFNULL(dateFound, \'NOT_FOUND\') as dateFound FROM listinfo L ' +
         'INNER JOIN allspotclues S on L.spotid=S.spotid ' +
         'LEFT JOIN spotsfound F on F.userid=L.ownerid ' +
         'WHERE L.ownerid=? AND L.isCurrent=1'
