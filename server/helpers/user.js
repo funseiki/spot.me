@@ -240,16 +240,41 @@ var user = {
     GetProfile: function(userid, callback) {
         var locals = {};
         async.waterfall([
-            db.GetConnection.bind(db),
+            db.GetTransaction.bind(db),
             function(connection, callback) {
                 locals.connection = connection;
                 utils.cleanAndPrune(['userid' ], {userid: userid}, callback);
             },
             function(clean_user, callback) {
-                locals.connection.query(QueryStrings.User.GET_PROFILE, clean_user.userid, callback);
+                locals.clean_user = clean_user;
+                locals.connection.query(QueryStrings.User.GET_NICKNAME, {id: locals.clean_user.userid}, callback);
+            },
+            function(rows, fields, callback) {
+                if(!rows || !rows[0]) {
+                    callback({
+                        success: false,
+                        message: "Unable to get user information"
+                    });
+                    return;
+                }
+                locals.nickname = rows[0].nickname;
+                locals.connection.query(QueryStrings.User.GET_PROFILE, locals.clean_user.userid, callback);
+            },
+            function(rows, fields, callback) {
+                if(!rows || !rows[0]) {
+                    callback({
+                        success: false,
+                        message: "Unable to get profile information"
+                    });
+                    return;
+                }
+                var out = rows;
+                out.nickname = locals.nickname;
+                out.success = true;
+                callback(null, out);
             }
         ], function(err, result) {
-            db.EndConnection(err, result, locals.connection, callback);
+            db.EndTransaction(err, result, locals.connection, callback);
         })
     },
     get: function(userid, query, callback) {
