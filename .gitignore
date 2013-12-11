@@ -22,3 +22,8 @@
 # /server/config
 /server/config/development.js
 /server/config/production.js
+
+# /website/
+/website/.DS_Store
+/website/img/.DS_Store
+/website/files/.DS_Store
