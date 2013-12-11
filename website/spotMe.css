@@ -1,0 +1,92 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del,
+dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup,
+tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form,
+label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption, footer,
+header, hgroup, menu, nav, output, ruby, section, summary, time, mark,
+audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup,
+menu, nav, section { 
+    display: block;
+}
+
+body {
+	font-family: Helvetica;
+    text-align: justify;
+	font-size: 14px;
+    color: #666666;
+}
+
+h1 {
+    font-size: 24px;
+    color: #487890;
+    text-align: center;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 16px;
+    color: #D16603;
+}
+
+section {
+    margin: 1em 0em;
+}
+
+img {
+    width: 150px;
+    border: 1px solid #DDDDDD;
+    margin-bottom: 0.5em;
+}
+
+a {
+    color: #B1320A; 
+}
+
+div#container {
+    margin: 3em 6em ;
+}
+
+section#pics {
+    text-align: center;
+}
+
+
+p#author {
+    font-size: 12px;
+    color: #777777;
+    margin: 0.8em 0;
+    text-align: center;
+}
+
+p.imgDesc {
+    width: 150px;
+    font-size: 12px;
+    text-align: left;
+}
+
+div.uis {
+    overflow: hidden;    
+    display: block;
+    text-align: center;
+}
+
+div.imgContainer {
+    display: inline-block;
+    vertical-align: top;
+    margin: 1em 1em;
+}
+
+span.highlight {
+    color: #2B2B2B;
+    font-weight:bold;
+}

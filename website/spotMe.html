@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title> Spot.me </title>
+		<link type="text/css" rel="stylesheet" href="spotMe.css"/>
+	</head>
+	<body>
+		<div id="container">
+			<h1> Spot.me</h1>
+			<p id="author">Vinit Shah, Jicong Wang, Pei-fen Tu</p> 
+			<section id="desc">
+				Message-in-a-bottle is signaling without guarantee of delivery. When someone receives the message, it's interesting to see his reaction or opinion towards the message; this is a good way of starting a conversation between strangers. We build this android application to model this signal so that users can share and capture messages in environment with their phone. (<a href="https://github.com/funseiki/spot.me">GitHub</a>, <a href="files/slides.pdf">Slides</a>) 
+			</section>
+			<section id="problem">
+				<h2>Problem statement</h2>
+				To model messege-in-a-bottle, we need to address three questions. First, How can we model the signalling using current technology? Second, What types of signals does this implementation promote? And third, How can we motivate the varied target audience - Gamers and explorers? 
+			</section>
+			<section id="approach">
+				<h2>Approach</h2>
+				We model the signal as <span class="highlight">a collection of locked spots</span>. Users have to unlocked spots to see the stories and images behind the clues. As a result, on <span class="highlight">spot creation</span>, the signaling is through clues, images, and stories. On spot uncovering, Signalling is through images, stories, and comment text. Because our approach utilizes geolacation a lot, it's better buidling on light devides.As a result, we decided to build an <span class="highlight"> Android app</span>. We implemented the app with <span class="highlight">Java, node.js, and MySQL database</span>. We will show our implementation with the snapshots. 
+				<div class="uis">
+					<div class='imgContainer'>
+						<img src="img/1.png"/>
+						<p class="imgDesc">Main screen</p>
+					</div>				
+					<div class='imgContainer'>
+						<img src="img/2.png"/>
+						<p class="imgDesc">Top N list that selected randomly from our database. We attract users to unlock a spot with <span class="highlight">interesting clues and stories</span> behind the spot. We plan to also add incomplete list here to further motivate users to complete the list.</span></p>
+					</div>
+					<div class='imgContainer'>
+						<img src="img/3.png"/>
+						<p class="imgDesc">Confirm to unlock a spot</span></p>
+					</div>
+					<div class='imgContainer'>
+						<img src="img/5.png"/>
+						<p class="imgDesc">If users make a wrong guess, we will give them <span class="highlight">feedbacks</span> on the spot in case the hint is too vague.</p>
+					</div>
+					<div class='imgContainer'>
+						<img src="img/4.png"/>
+						<p class="imgDesc">When users get the right spot, we show <span class="highlight">story, image, and the comments</span> as rewards. </p>
+					</div>				
+					<div class='imgContainer'>
+						<img src="img/6.png"/>
+						<p class="imgDesc">Show the <span class="highlight">number of spots </span>users have unlocked in the profile page. Also, we show the number of unlocked spots here so gamers will be motivated to unlock more spots.
+					</div>	
+				</div>
+
+			</section>
+			<section id="result"> 
+				<h2>Result</h2>
+				We have done a pilot study to see if our UI works as we intended to do. We conducted an survey for 7 selected users. Three of them are gamers and four of them are not. The result shows that our app is intriguing and interesting for both gamers and normal people. Most users thought it was easy to use. Our instances liked the idea of them sending and capturing messages asynchronously, but they also pointed out that sometime the hints didn't make sense at all.
+			<section>
+		</div>
+
+
+
+	</body>
+</html>
