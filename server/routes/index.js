@@ -54,7 +54,7 @@ function routes(app, passport) {
     })
 
     app.get('/', function(req, res){
-        res.render("register");
+        res.redirect('/spotMe.html')
     });
 
 }

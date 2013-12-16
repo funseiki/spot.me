@@ -10,7 +10,8 @@ var express = require('express')
 var app = express();
 app.configure(function()
 {
-    var public_path = path.join(__dirname, 'public');
+    var public_path = path.join(__dirname,'..', 'website');
+    console.log(public_path)
     app.set('port', config.url.port);
     app.set('ip', config.url.ip);
     app.set('views', __dirname + '/views');
